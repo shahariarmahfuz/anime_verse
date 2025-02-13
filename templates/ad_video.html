@@ -45,7 +45,6 @@
             background: rgba(0, 0, 0, 0.7);
             color: white;
             font-size: 1rem;
-            transition: all 0.3s ease;
         }
         select:hover, input:hover, textarea:hover {
             border-color: #9b6bf0;
@@ -53,7 +52,6 @@
         select:focus, input:focus, textarea:focus {
             outline: none;
             border-color: #7c3aed;
-            box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
         }
         button {
             background: #7c3aed;
@@ -63,26 +61,34 @@
         }
         button:hover {
             background: #9b6bf0;
-            transform: translateY(-2px);
         }
         .episode-card {
             background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 8px;
             margin-bottom: 1rem;
             border: 1px solid rgba(124, 58, 237, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .episode-card h3 {
-            margin-bottom: 0.5rem;
+        .episode-info {
+            flex-grow: 1;
         }
-        .episode-card a {
+        .episode-actions {
+            display: flex;
+            gap: 15px;
+        }
+        .episode-actions a {
             color: #7c3aed;
-            text-decoration: none;
-            margin-right: 1rem;
+            font-size: 1.2rem;
+            padding: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
         }
-        .episode-card a:hover {
+        .episode-actions a:hover {
             color: #9b6bf0;
-            text-decoration: underline;
+            background: rgba(255, 255, 255, 0.1);
         }
         .filter-section {
             margin-bottom: 2rem;
@@ -108,12 +114,41 @@
             height: 100px;
             resize: vertical;
         }
+        .confirmation-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        .confirmation-dialog p {
+            margin-bottom: 1.5rem;
+        }
+        .dialog-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>Admin Panel</h1>
 
-    <!-- Filter Section -->
     <div class="filter-section">
         <h2>Filter Content</h2>
         <form method="GET">
@@ -123,7 +158,7 @@
                     <option value="{{ anime.id }}" {% if selected_anime and anime.id == selected_anime.id %}selected{% endif %}>{{ anime.name }}</option>
                 {% endfor %}
             </select>
-            
+
             {% if selected_anime %}
                 <select name="season_number" onchange="this.form.submit()">
                     <option value="">Select Season</option>
@@ -135,7 +170,6 @@
         </form>
     </div>
 
-    <!-- Add New Episode Form -->
     <div class="add-episode-form">
         <h2>Add New Episode</h2>
         <form method="POST">
@@ -187,17 +221,52 @@
         </form>
     </div>
 
-    <!-- Manage Episodes Section -->
     {% if selected_anime and selected_season %}
         <h2>Manage Episodes - {{ selected_anime.name }} Season {{ selected_season.season_number }}</h2>
         {% for video in selected_season.videos %}
             <div class="episode-card">
-                <h3>{{ video.title }} (ID: {{ video.id }})</h3>
-                <p>Serial: {{ video.serial }}</p>
-                <a href="{{ url_for('edit_video', video_id=video.id) }}">Edit</a>
-                <a href="{{ url_for('delete_video', video_id=video.id) }}">Delete</a>
+                <div class="episode-info">
+                    <h3>{{ video.title }}</h3>
+                    <p>Serial: {{ video.serial }} | ID: {{ video.id }}</p>
+                </div>
+                <div class="episode-actions">
+                    <a href="{{ url_for('edit_video', video_id=video.id) }}" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="#" title="Delete" onclick="showConfirmationDialog('{{ url_for('delete_video', video_id=video.id) }}')">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
             </div>
         {% endfor %}
     {% endif %}
+
+    <div class="overlay" id="overlay"></div>
+    <div class="confirmation-dialog" id="confirmationDialog">
+        <p>Are you sure you want to delete this episode?</p>
+        <div class="dialog-buttons">
+            <button onclick="confirmDelete(true)">Delete</button>
+            <button class="cancel-btn" onclick="confirmDelete(false)">Cancel</button>
+        </div>
+    </div>
+    <button onclick="window.location.href='/'" style="display: block; margin-top: 1rem; background: #7c3aed; color: white; font-weight: 600; padding: 12px; width: 100%; border-radius: 8px; border: none; font-size: 1rem; cursor: pointer;">Back to Home</button>
+
+    <script>
+        let deleteUrl = '';
+
+        function showConfirmationDialog(url) {
+            deleteUrl = url;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('confirmationDialog').style.display = 'block';
+        }
+
+        function confirmDelete(confirm) {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('confirmationDialog').style.display = 'none';
+            if (confirm) {
+                window.location.href = deleteUrl;
+            }
+        }
+    </script>
 </body>
 </html>
