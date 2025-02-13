@@ -26,16 +26,62 @@
             padding: 1.2rem 2rem;
             background: linear-gradient(145deg, rgba(25,25,25,0.95) 0%, rgba(15,15,15,0.95) 100%);
             backdrop-filter: blur(8px);
-            position: sticky;
+            position: relative;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(124,58,237,0.2);
         }
         .episode-title {
-            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            max-width: 85%;
+            overflow: hidden;
+        }
+        .title-content {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+            overflow: hidden;
+        }
+        .episode-icon {
             color: #7c3aed;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .episode-number {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #9b6bf0;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .episode-number i {
+            color: #7c3aed;
+            font-size: 0.9rem;
+        }
+        .episode-name {
+            color: #ffffff;
+            font-size: 1.4rem;
             font-weight: 600;
-            letter-spacing: -0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            padding-left: 0.8rem;
+        }
+        .episode-name::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 70%;
+            background: #7c3aed;
+            border-radius: 2px;
         }
         .home-icon {
             color: white;
@@ -218,7 +264,16 @@
     <!-- Page Header -->
     <div class="page-header">
         <div class="episode-title">
-            Episode {{ video.serial }}: {{ video.title }}
+            <i class="fas fa-play-circle episode-icon"></i>
+            <div class="title-content">
+                <span class="episode-number">
+                    <i class="fas fa-hashtag"></i>
+                    {{ video.serial }}
+                </span>
+                <span class="episode-name">
+                    {{ video.title }}
+                </span>
+            </div>
         </div>
         <a href="{{ url_for('home') }}" class="home-icon">
             <i class="fas fa-home"></i>
