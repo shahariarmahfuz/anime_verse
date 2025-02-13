@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ video.title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+        /* Header Styles */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(145deg, rgba(25,25,25,0.95) 0%, rgba(15,15,15,0.95) 100%);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(124,58,237,0.2);
+        }
+        .episode-title {
+            font-size: 1.5rem;
+            color: #7c3aed;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .home-icon {
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+        .home-icon:hover {
+            transform: scale(1.1);
+            color: #7c3aed;
+        }
+        /* Video Header */
+        .video-header {
+            padding: 1.5rem 0;
+            margin: 0 1.5rem;
+            border-bottom: 1px solid rgba(124,58,237,0.2);
+            text-align: center;
+        }
+        .video-header h1 {
+            color: #7c3aed;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        /* Video Container */
+        .video-container {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        /* Quality Selector */
+        .quality-selector {
+            margin: 0 0 1.5rem;
+            width: 100%;
+            position: relative;
+        }
+        .quality-select {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 2px solid #7c3aed;
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(124,58,237,0.15) 0%, rgba(0,0,0,0.7) 100%);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124,58,237,0.2);
+        }
+        .quality-select:hover {
+            border-color: #9b6bf0;
+            box-shadow: 0 6px 20px rgba(124,58,237,0.3);
+        }
+        .quality-selector::after {
+            content: "▾";
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7c3aed;
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+        /* Video Player */
+        .player-wrapper {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(124,58,237,0.2);
+            background: #000;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Video Description */
+        .video-description {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            white-space: pre-line;
+        }
+        .video-description h2 {
+            color: #7c3aed;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .video-description p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        /* Episode Navigation */
+        .episode-navigation {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .episode-section {
+            margin: 3rem 0;
+        }
+        .episode-section h3 {
+            color: #7c3aed;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            padding-left: 10px;
+            border-left: 4px solid #7c3aed;
+        }
+        .episode-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .episode-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+        .episode-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        .episode-thumbnail {
+            width: 120px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        .episode-info {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .episode-info h4 {
+            font-size: 1rem;
+            color: #7c3aed;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.5rem;
+        }
+        .episode-info p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        @media (max-width: 768px) {
+            .episode-card {
+                padding: 0.8rem;
+            }
+            .episode-thumbnail {
+                width: 100px;
+                height: 60px;
+            }
+            .episode-info h4 {
+                font-size: 0.9rem;
+            }
+            .episode-info p {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="episode-title">
+            Episode {{ video.serial }}: {{ video.title }}
+        </div>
+        <a href="{{ url_for('home') }}" class="home-icon">
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <!-- Video Header -->
+    <div class="video-header">
+        <h1>{{ anime_name }}</h1>
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-container">
+        <!-- Quality Selector -->
+        <div class="quality-selector">
+            <select class="quality-select" id="quality-selector" onchange="changeVideoQuality(this.value)">
+                {% for quality, link in video.links.items() %}
+                <option value="{{ link }}" {% if quality == default_quality %}selected{% endif %}>{{ quality }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Video Player -->
+        <div class="player-wrapper">
+            <video id="my-video" controls playsinline>
+                <source src="{{ video.links[default_quality] }}" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Video Description -->
+        <div class="video-description">
+            <h2>Episode Description</h2>
+            <p>{{ video.description }}</p>
+        </div>
+    </div>
+
+    <!-- Episode Navigation -->
+    <div class="episode-navigation">
+        {% if prev_episodes %}
+        <div class="episode-section">
+            <h3>Previous Episodes</h3>
+            <div class="episode-list">
+                {% for ep in prev_episodes %}
+                <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
+                    <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail">
+                    <div class="episode-info">
+                        <h4>Episode {{ ep.serial }}: {{ ep.title }}</h4>
+                        <p>{{ ep.short_description }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if next_episodes %}
+        <div class="episode-section">
+            <h3>Next Episodes</h3>
+            <div class="episode-list">
+                {% for ep in next_episodes %}
+                <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
+                    <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail">
+                    <div class="episode-info">
+                        <h4>Episode {{ ep.serial }}: {{ ep.title }}</h4>
+                        <p>{{ ep.short_description }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Fluid Player and Custom Scripts -->
+    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+    <script>
+        var myFP = fluidPlayer('my-video', {
+            layoutControls: {
+                primaryColor: "#7c3aed",
+                playbackRateEnabled: true,
+                allowDownload: false,
+                fillToContainer: true,
+                autoPlay: false,
+                playPauseAnimation: true,
+                controlBar: {
+                    autoHide: true,
+                    hideTimeout: 3000,
+                }
+            }
+        });
+
+        function changeVideoQuality(link) {
+            const videoPlayer = document.getElementById('my-video');
+            const currentTime = videoPlayer.currentTime;
+            videoPlayer.src = link;
+            videoPlayer.load();
+            videoPlayer.currentTime = currentTime;
+            videoPlayer.play();
+        }
+
+        let timer;
+        const videoPlayer = document.getElementById('my-video');
+        videoPlayer.addEventListener('playing', () => {
+            timer = setInterval(() => {
+                const bufferEnd = videoPlayer.buffered.end(videoPlayer.buffered.length - 1);
+                const diff = bufferEnd - videoPlayer.currentTime;
+                if (diff < 2) {
+                    const qualities = Array.from(document.querySelectorAll('#quality-selector option'));
+                    const currentIndex = qualities.findIndex(opt => opt.selected);
+                    if (currentIndex > 0) {
+                        qualities[currentIndex - 1].selected = true;
+                        changeVideoQuality(qualities[currentIndex - 1].value);
+                    }
+                }
+            }, 1000);
+        });
+
+        videoPlayer.addEventListener('pause', () => {
+            clearInterval(timer);
+        });
+    </script>
+</body>
+</html>

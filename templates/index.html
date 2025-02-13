@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeVerse | Premium Streaming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-bar h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, #7c3aed, #e94584);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        .admin-icon {
+            font-size: 1.5rem;
+            color: #7c3aed;
+            transition: all 0.3s ease;
+            padding: 0.8rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .admin-icon:hover {
+            color: #ffffff;
+            background: #7c3aed;
+            transform: rotate(15deg);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+        .search-bar {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
+        }
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7c3aed;
+            font-size: 1.3rem;
+        }
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.5px;
+        }
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        .anime-card {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .anime-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(124, 58, 237, 0.3);
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        .anime-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .anime-card:hover img {
+            transform: scale(1.1);
+        }
+        .anime-card h3 {
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #7c3aed, #e94584);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            position: relative;
+            margin: 0;
+            line-height: 1.4;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .anime-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0.8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(45deg, #7c3aed, #e94584);
+            transition: width 0.3s ease;
+        }
+        .anime-card:hover h3::after {
+            width: 80%;
+        }
+        .no-results {
+            text-align: center;
+            padding: 5rem 0;
+            opacity: 0.7;
+        }
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: #7c3aed;
+        }
+        .no-results p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem auto 0;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(45deg, #7c3aed, #e94584);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            font-size: 0.9rem;
+        }
+        .home-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5);
+        }
+        .home-button i {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+        .pagination-container {
+            position: relative;
+            margin-top: 3rem;
+            background: transparent;
+            padding: 1rem 0;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .pagination a {
+            padding: 1rem 2rem;
+            background: rgba(124, 58, 237, 0.3);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .pagination a:hover {
+            background: #7c3aed;
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+            transform: scale(1.05);
+        }
+        .page-info {
+            font-weight: 500;
+            color: #7c3aed;
+            min-width: 120px;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .nav-bar h1 {
+                font-size: 2.2rem;
+            }
+            .anime-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            .search-input {
+                padding: 1.2rem 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-bar">
+            <h1><i class="fas fa-compact-disc"></i> AnimeVerse</h1>
+            <a href="/nai" class="admin-icon">
+                <i class="fas fa-user-astronaut"></i>
+            </a>
+        </nav>
+        <div class="header">
+            <form method="GET" action="{{ url_for('home') }}">
+                <div class="search-bar">
+                    <i class="fas fa-stars search-icon"></i>
+                    <input type="text" name="search" 
+                           placeholder="Discover your next obsession..." 
+                           value="{{ search_query }}" 
+                           class="search-input"
+                           aria-label="Search anime">
+                </div>
+            </form>
+        </div>
+        {% if anime_list %}
+            <div class="anime-grid">
+                {% for anime in anime_list %}
+                <a href="{{ url_for('anime_details', anime_id=anime.id) }}" style="text-decoration: none;">
+                    <div class="anime-card">
+                        <div class="image-container">
+                            <img src="{{ anime.image }}" alt="{{ anime.name }}">
+                        </div>
+                        <h3>{{ anime.name }}</h3>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-galaxy"></i>
+                <p>The story you seek has vanished into the cosmos...</p>
+                <a href="{{ url_for('home') }}" class="home-button">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        {% endif %}
+        <div class="pagination-container">
+            <div class="pagination">
+                {% if page > 1 %}
+                    <a href="{{ url_for('home', page=page-1, search=search_query) }}">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                {% endif %}
+                <span class="page-info">Page {{ page }} of {{ total_pages }}</span>
+                {% if page < total_pages %}
+                    <a href="{{ url_for('home', page=page+1, search=search_query) }}">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+        const searchInput = document.querySelector('.search-input');
+        let searchTimeout;
+        searchInput.addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                this.form.submit();
+            }, 800);
+        });
+    </script>
+</body>
+</html>

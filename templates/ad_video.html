@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 2rem;
+        }
+        h1, h2, h3 {
+            color: #7c3aed;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        form {
+            margin-bottom: 2rem;
+        }
+        select, input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 2px solid #7c3aed;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        select:hover, input:hover, textarea:hover {
+            border-color: #9b6bf0;
+        }
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+        }
+        button {
+            background: #7c3aed;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #9b6bf0;
+            transform: translateY(-2px);
+        }
+        .episode-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+        .episode-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        .episode-card a {
+            color: #7c3aed;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .episode-card a:hover {
+            color: #9b6bf0;
+            text-decoration: underline;
+        }
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+        .filter-section select {
+            width: auto;
+            margin-right: 1rem;
+        }
+        .add-episode-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+        .add-episode-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #7c3aed;
+            font-weight: 500;
+        }
+        .add-episode-form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <h2>Filter Content</h2>
+        <form method="GET">
+            <select name="anime_id" onchange="this.form.submit()">
+                <option value="">Select Anime</option>
+                {% for anime in anime_list %}
+                    <option value="{{ anime.id }}" {% if selected_anime and anime.id == selected_anime.id %}selected{% endif %}>{{ anime.name }}</option>
+                {% endfor %}
+            </select>
+            
+            {% if selected_anime %}
+                <select name="season_number" onchange="this.form.submit()">
+                    <option value="">Select Season</option>
+                    {% for season in selected_anime.seasons %}
+                        <option value="{{ season.season_number }}" {% if selected_season and season.season_number == selected_season.season_number %}selected{% endif %}>Season {{ season.season_number }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Add New Episode Form -->
+    <div class="add-episode-form">
+        <h2>Add New Episode</h2>
+        <form method="POST">
+            <div>
+                <label>Anime Name:</label>
+                <input type="text" name="anime_name" required>
+            </div>
+            <div>
+                <label>Anime Image URL:</label>
+                <input type="text" name="anime_image">
+            </div>
+            <div>
+                <label>Anime Description:</label>
+                <textarea name="anime_description" required></textarea>
+            </div>
+            <div>
+                <label>Season Number:</label>
+                <input type="number" name="season_number" required>
+            </div>
+            <div>
+                <label>Episode Title:</label>
+                <input type="text" name="video_title" required>
+            </div>
+            <div>
+                <label>Full HD (1080p) Link:</label>
+                <input type="text" name="video_link_1080">
+            </div>
+            <div>
+                <label>HD (720p) Link:</label>
+                <input type="text" name="video_link_720" required>
+            </div>
+            <div>
+                <label>SD (480p) Link:</label>
+                <input type="text" name="video_link_480">
+            </div>
+            <div>
+                <label>Thumbnail Link:</label>
+                <input type="text" name="thumbnail_link" required>
+            </div>
+            <div>
+                <label>Episode Description:</label>
+                <textarea name="video_description"></textarea>
+            </div>
+            <div>
+                <label>Serial Number:</label>
+                <input type="number" name="serial_number" required>
+            </div>
+            <button type="submit">Add Episode</button>
+        </form>
+    </div>
+
+    <!-- Manage Episodes Section -->
+    {% if selected_anime and selected_season %}
+        <h2>Manage Episodes - {{ selected_anime.name }} Season {{ selected_season.season_number }}</h2>
+        {% for video in selected_season.videos %}
+            <div class="episode-card">
+                <h3>{{ video.title }} (ID: {{ video.id }})</h3>
+                <p>Serial: {{ video.serial }}</p>
+                <a href="{{ url_for('edit_video', video_id=video.id) }}">Edit</a>
+                <a href="{{ url_for('delete_video', video_id=video.id) }}">Delete</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
