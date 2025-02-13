@@ -344,7 +344,7 @@ def ping():
     return jsonify({"status": "alive"})
 
 def keep_alive():
-    url = "https://animeverse-yfhe.onrender.com/ping"
+    url = "https://nekofilx.onrender.com"
     while True:
         time.sleep(300)
         try:
