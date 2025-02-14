@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Select Anime to Edit Videos</h1>
+
+<ul>
+    {% for anime in anime_list %}
+        <li>
+            <a href="{{ url_for('edit_video_select_season', anime_id=anime.id) }}">{{ anime.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('edit_dashboard') }}">Back to Dashboard</a>
+
+<style>
+    h1 {
+        font-size: 24px;
+        color: #ff4757;
+    }
+
+    ul {
+        padding-left: 0;
+        list-style-type: none;
+    }
+
+    li {
+        margin: 10px 0;
+    }
+
+    a {
+        color: #ff4757;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 18px;
+        }
+    }
+</style>
+{% endblock %}
