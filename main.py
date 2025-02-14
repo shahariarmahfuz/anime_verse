@@ -11,5 +11,20 @@ def maintenance():
 def page_not_found(e):
     return redirect(url_for('maintenance'))
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"status": "alive"})
+
+def keep_alive():
+    url = "https://nekofilx.onrender.com"
+    while True:
+        time.sleep(300)
+        try:
+            requests.get(url)
+        except Exception as e:
+            print(f"Error: {e}")
+
 if __name__ == '__main__':
+    
+    threading.Thread(target=keep_alive, daemon=True).start()
     app.run(host='0.0.0.0', port=5000)
