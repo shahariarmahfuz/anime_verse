@@ -1,7 +1,7 @@
-# server.py
-from flask import Flask, send_file, redirect, url_for
+from flask import Flask, send_file, redirect, url_for, jsonify
 import requests
 import threading
+import time
 
 app = Flask(__name__)
 
@@ -20,13 +20,12 @@ def ping():
 def keep_alive():
     url = "https://nekofilx.onrender.com"
     while True:
-        time.sleep(300)
+        time.sleep(300)  # Sleep for 5 minutes
         try:
             requests.get(url)
         except Exception as e:
             print(f"Error: {e}")
 
 if __name__ == '__main__':
-    
     threading.Thread(target=keep_alive, daemon=True).start()
     app.run(host='0.0.0.0', port=5000)
