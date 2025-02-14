@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit Anime: {{ anime.name }}</h1>
+
+<form method="POST">
+    <label for="name">Anime Name:</label>
+    <input type="text" name="name" id="name" value="{{ anime.name }}" required>
+    <br>
+    <label for="image">Anime Image URL:</label>
+    <input type="text" name="image" id="image" value="{{ anime.image }}" required>
+    <br>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description" required>{{ anime.description }}</textarea>
+    <br>
+    <button type="submit">Save Changes</button>
+</form>
+
+<h2>Seasons</h2>
+<ul>
+    {% for season in anime.seasons %}
+        <li>
+            Season {{ season.season_number }}
+            <a href="{{ url_for('delete_season', anime_id=anime.id, season_number=season.season_number) }}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<form method="POST" action="{{ url_for('add_season', anime_id=anime.id) }}">
+    <label for="season_number">Add New Season:</label>
+    <input type="number" name="season_number" id="season_number" required>
+    <button type="submit">Add Season</button>
+</form>
+
+<a href="{{ url_for('edit_anime_select') }}">Back to Anime List</a>
+
+<style>
+    label, input, textarea, button {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        border: 1px solid #444;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #ff4757;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #e84118;
+    }
+
+    @media (max-width: 768px) {
+        button {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}
