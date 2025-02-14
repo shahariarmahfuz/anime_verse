@@ -1,121 +1,70 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1><i class="fas fa-video"></i> Video Admin</h1>
-
-<form method="POST">
-    <input type="hidden" name="step" value="select">
-    <label for="anime_id">Select Anime:</label>
-    <select name="anime_id" id="anime_id" required>
-        <option value="">Select Anime</option>
-        {% for anime in anime_list %}
-            <option value="{{ anime.id }}">{{ anime.name }}</option>
-        {% endfor %}
-    </select>
-    
-    <label for="season_number">Select Season:</label>
-    <select name="season_number" id="season_number" required>
-        <option value="">Select Season</option>
-    </select>
-
-    <button type="submit"><i class="fas fa-arrow-right"></i> Select</button>
-</form>
-
-{% if selected_anime and selected_season %}
-    <h2>{{ selected_anime.name }} - Season {{ selected_season.season_number }}</h2>
-    
-    <form method="POST">
-        <input type="hidden" name="step" value="add">
-        <input type="hidden" name="anime_id" value="{{ selected_anime.id }}">
-        <input type="hidden" name="season_number" value="{{ selected_season.season_number }}">
-
-        <label for="video_title">Video Title:</label>
-        <input type="text" name="video_title" id="video_title" required>
-
-        <label for="video_link_1080">1080p Link:</label>
-        <input type="text" name="video_link_1080" id="video_link_1080">
-
-        <label for="video_link_720">720p Link:</label>
-        <input type="text" name="video_link_720" id="video_link_720" required>
-
-        <label for="video_link_480">480p Link:</label>
-        <input type="text" name="video_link_480" id="video_link_480">
-
-        <label for="thumbnail_link">Thumbnail Link:</label>
-        <input type="text" name="thumbnail_link" id="thumbnail_link" required>
-
-        <label for="video_description">Description:</label>
-        <textarea name="video_description" id="video_description" required></textarea>
-
-        <label for="serial_number">Serial Number:</label>
-        <input type="number" name="serial_number" id="serial_number" required>
-
-        <button type="submit"><i class="fas fa-plus"></i> Add Video</button>
-    </form>
-{% endif %}
-
-<script>
-    document.getElementById('anime_id').addEventListener('change', function() {
-        const animeId = this.value;
-        const seasonDropdown = document.getElementById('season_number');
-        seasonDropdown.innerHTML = '<option value="">Select Season</option>';
-
-        if (animeId) {
-            fetch(`/get_seasons/${animeId}`)
-                .then(response => response.json())
-                .then(data => {
-                    data.seasons.forEach(season => {
-                        const option = document.createElement('option');
-                        option.value = season.season_number;
-                        option.textContent = `Season ${season.season_number}`;
-                        seasonDropdown.appendChild(option);
-                    });
-                });
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Anime</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
         }
-    });
-</script>
 
-<style>
-    h1, h2 {
-        color: #ff4757;
-    }
+        h1 {
+            color: #ff4757;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
 
-    label {
-        font-weight: bold;
-    }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    select, input, textarea {
-        width: 100%;
-        margin: 10px 0;
-        padding: 10px;
-        background-color: #333;
-        border: 1px solid #444;
-        border-radius: 5px;
-        color: white;
-    }
-
-    button {
-        background-color: #ff4757;
-        color: white;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    button:hover {
-        background-color: #e84118;
-    }
-
-    @media (max-width: 768px) {
-        label, select, input, textarea {
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: white;
             font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
         }
 
         button {
-            font-size: 14px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
         }
-    }
-</style>
-{% endblock %}
+
+        button:hover {
+            background-color: #e84118;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Anime</h1>
+    <form method="POST">
+        <input type="text" name="anime_name" placeholder="Anime Name" required>
+        <input type="text" name="anime_image" placeholder="Anime Image URL">
+        <textarea name="anime_description" placeholder="Anime Description" required></textarea>
+        <input type="number" name="season_number" placeholder="Season Number" required>
+        <button type="submit">Create Anime</button>
+    </form>
+</body>
+</html>
