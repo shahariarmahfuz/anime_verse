@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Anime</title>
+</head>
+<body>
+    <h1>Edit Anime</h1>
+    <form method="POST">
+        <input type="text" name="name" value="{{ anime.name }}" required>
+        <input type="text" name="image" value="{{ anime.image }}">
+        <textarea name="description" required>{{ anime.description }}</textarea>
+        <button type="submit">Update Anime</button>
+    </form>
+</body>
+</html>
