@@ -1,144 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Raleway', sans-serif;
-        }
-        body {
-            background: #0a0a0a;
-            color: #ffffff;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #7c3aed;
-        }
-        .edit-form {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            max-width: 600px;
-            margin: auto;
-        }
-        .edit-form label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #9b6bf0;
-            font-weight: 500;
-        }
-        .edit-form input, .edit-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 1rem;
-            border: 2px solid #7c3aed;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            font-size: 1rem;
-        }
-        .edit-form input:hover, .edit-form textarea:hover {
-            border-color: #9b6bf0;
-        }
-        .edit-form input:focus, .edit-form textarea:focus {
-            outline: none;
-            border-color: #7c3aed;
-        }
-        .edit-form textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        .edit-form button {
-            background: #7c3aed;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 12px;
-            width: 100%;
-            border-radius: 8px;
-            border: none;
-            font-size: 1rem;
-        }
-        .edit-form button:hover {
-            background: #9b6bf0;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #7c3aed;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        .back-link:hover {
-            color: #9b6bf0;
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Edit Video</h1>
+{% block content %}
+<style>
+    body {
+        background-color: #121212;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
 
-    <form method="POST" class="edit-form">
-        <div>
-            <label>Anime Name:</label>
-            <input type="text" name="anime_name" value="{{ current_anime.name }}" required>
-        </div>
-        <div>
-            <label>Anime Image URL:</label>
-            <input type="text" name="anime_image" value="{{ current_anime.image }}" required>
-        </div>
-        <div>
-            <label>Anime Description:</label>
-            <textarea name="anime_description">{{ current_anime.description }}</textarea>
-        </div>
-        <div>
-            <label>Season Number:</label>
-            <input type="number" name="season_number" value="{{ current_season }}" required>
-        </div>
-        <div>
-            <label>Episode Title:</label>
-            <input type="text" name="video_title" value="{{ video.title }}" required>
-        </div>
-        <div>
-            <label>Full HD (1080p) Link:</label>
-            <input type="text" name="video_link_1080" value="{{ video.links.get('1080p', '') }}">
-        </div>
-        <div>
-            <label>HD (720p) Link:</label>
-            <input type="text" name="video_link_720" value="{{ video.links.get('720p', '') }}" required>
-        </div>
-        <div>
-            <label>SD (480p) Link:</label>
-            <input type="text" name="video_link_480" value="{{ video.links.get('480p', '') }}">
-        </div>
-        <div>
-            <label>Thumbnail Link:</label>
-            <input type="text" name="thumbnail_link" value="{{ video.thumbnail }}" required>
-        </div>
-        <div>
-            <label>Episode Description:</label>
-            <textarea name="video_description">{{ video.description }}</textarea>
-        </div>
-        <div>
-            <label>Serial Number:</label>
-            <input type="number" name="serial_number" value="{{ video.serial }}" required>
-        </div>
-        <button type="submit">Update Video</button>
+    .container {
+        background: #1c1c1c;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    h1 {
+        color: #ff4757;
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    label {
+        font-size: 16px;
+        color: white;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #2c2c2c;
+        color: white;
+        font-size: 14px;
+    }
+
+    textarea {
+        height: 100px;
+        resize: none;
+    }
+
+    button {
+        background: #ff4757;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    a {
+        text-align: center;
+        display: block;
+        color: #ff4757;
+        font-size: 14px;
+        margin-top: 15px;
+        text-decoration: none;
+    }
+</style>
+
+<div class="container">
+    <h1>Edit Video: {{ video.title }}</h1>
+    <form method="POST">
+        <label for="video_title">Video Title:</label>
+        <input type="text" name="video_title" id="video_title" value="{{ video.title }}" required>
+
+        <label for="season_number">Season Number:</label>
+        <input type="number" name="season_number" id="season_number" value="{{ current_season }}" required>
+
+        <label for="video_link_1080">1080p Link:</label>
+        <input type="text" name="video_link_1080" id="video_link_1080" value="{{ video.links.get('1080p', '') }}">
+
+        <label for="video_link_720">720p Link:</label>
+        <input type="text" name="video_link_720" id="video_link_720" value="{{ video.links.get('720p', '') }}" required>
+
+        <label for="video_link_480">480p Link:</label>
+        <input type="text" name="video_link_480" id="video_link_480" value="{{ video.links.get('480p', '') }}">
+
+        <label for="thumbnail_link">Thumbnail Link:</label>
+        <input type="text" name="thumbnail_link" id="thumbnail_link" value="{{ video.thumbnail }}" required>
+
+        <label for="video_description">Description:</label>
+        <textarea name="video_description" id="video_description" required>{{ video.description }}</textarea>
+
+        <label for="serial_number">Serial Number:</label>
+        <input type="number" name="serial_number" id="serial_number" value="{{ video.serial }}" required>
+
+        <button type="submit">Save Changes</button>
     </form>
+    <a href="{{ url_for('edit_video_list', anime_id=current_anime.id, season_number=current_season) }}">Back to Video List</a>
+</div>
 
-    <a href="/ad_video" class="back-link"><i class="fa fa-arrow-left"></i> Back to Admin Panel</a>
-    <button onclick="window.location.href='/'" style="display: block; margin-top: 1rem; background: #7c3aed; color: white; font-weight: 600; padding: 12px; width: 100%; border-radius: 8px; border: none; font-size: 1rem; cursor: pointer;">Back to Home</button>
-
-</body>
-</html>
+{% endblock %}
