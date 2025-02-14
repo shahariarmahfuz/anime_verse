@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        text-align: center;
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .dashboard-container h1 {
+        font-size: 24px;
+        color: #ff4757;
+        margin-bottom: 20px;
+    }
+
+    .edit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: #1e90ff;
+        color: white;
+        padding: 12px 15px;
+        font-size: 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: 0.3s;
+        width: 90%;
+        max-width: 300px;
+        margin: 10px auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .edit-btn:hover {
+        background: #0077cc;
+    }
+
+    .edit-btn i {
+        font-size: 18px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        .dashboard-container h1 {
+            font-size: 22px;
+        }
+
+        .edit-btn {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .edit-btn i {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-tools"></i> Edit Dashboard</h1>
+    
+    <a href="{{ url_for('edit_video_select_anime') }}" class="edit-btn">
+        <i class="fas fa-video"></i> Edit Videos
+    </a>
+    
+    <a href="{{ url_for('edit_anime_select') }}" class="edit-btn">
+        <i class="fas fa-dragon"></i> Edit Anime
+    </a>
+</div>
+{% endblock %}
