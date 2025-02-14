@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Select Season for {{ anime.name }}</h1>
+
+<ul>
+    {% for season in anime.seasons %}
+        <li>
+            <a href="{{ url_for('edit_video_list', anime_id=anime.id, season_number=season.season_number) }}">Season {{ season.season_number }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('edit_video_select_anime') }}">Back to Anime List</a>
+
+<style>
+    ul {
+        padding-left: 0;
+    }
+
+    li {
+        margin: 10px 0;
+    }
+
+    a {
+        color: #ff4757;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 18px;
+        }
+    }
+</style>
+{% endblock %}
