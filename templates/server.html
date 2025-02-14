@@ -1,0 +1,141 @@
+<!-- 1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Maintenance | Premium Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .maintenance-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gear-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: spin 3s linear infinite;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 15px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #ffffff;
+            width: 65%;
+            border-radius: 10px;
+            animation: progress 2s ease-in-out infinite alternate;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes progress {
+            0% { width: 65%; }
+            100% { width: 85%; }
+        }
+
+        @media (max-width: 768px) {
+            .maintenance-container {
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="maintenance-container">
+        <i class="fas fa-tools gear-icon"></i>
+        <h1>System Maintenance in Progress</h1>
+        <p>We're currently performing premium system enhancements to improve your experience. Our team is working diligently to complete the maintenance as quickly as possible. Thank you for your patience and understanding.</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <div class="contact-info">
+            <p>For urgent inquiries, please contact us:</p>
+            <div class="social-links">
+                <a href="mailto:support@premiumservice.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+11234567890"><i class="fas fa-phone"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
