@@ -9,14 +9,6 @@
         padding: 20px;
     }
 
-    .container {
-        background: #1c1c1c;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 500px;
-        margin: auto;
-    }
-
     h1 {
         color: #ff4757;
         font-size: 24px;
@@ -28,11 +20,14 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        max-width: 500px;
+        margin: auto;
     }
 
     label {
         font-size: 16px;
         color: white;
+        font-weight: bold;
     }
 
     input, textarea {
@@ -58,6 +53,11 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background: #e84118;
     }
 
     a {
@@ -67,39 +67,56 @@
         font-size: 14px;
         margin-top: 15px;
         text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #e84118;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 20px;
+        }
+
+        label, input, textarea, button {
+            font-size: 14px;
+        }
+
+        button {
+            padding: 8px;
+        }
     }
 </style>
 
-<div class="container">
-    <h1>Edit Video: {{ video.title }}</h1>
-    <form method="POST">
-        <label for="video_title">Video Title:</label>
-        <input type="text" name="video_title" id="video_title" value="{{ video.title }}" required>
+<h1>Edit Video: {{ video.title }}</h1>
+<form method="POST">
+    <label for="video_title">Video Title:</label>
+    <input type="text" name="video_title" id="video_title" value="{{ video.title }}" required>
 
-        <label for="season_number">Season Number:</label>
-        <input type="number" name="season_number" id="season_number" value="{{ current_season }}" required>
+    <label for="season_number">Season Number:</label>
+    <input type="number" name="season_number" id="season_number" value="{{ current_season }}" required>
 
-        <label for="video_link_1080">1080p Link:</label>
-        <input type="text" name="video_link_1080" id="video_link_1080" value="{{ video.links.get('1080p', '') }}">
+    <label for="video_link_1080">1080p Link:</label>
+    <input type="text" name="video_link_1080" id="video_link_1080" value="{{ video.links.get('1080p', '') }}">
 
-        <label for="video_link_720">720p Link:</label>
-        <input type="text" name="video_link_720" id="video_link_720" value="{{ video.links.get('720p', '') }}" required>
+    <label for="video_link_720">720p Link:</label>
+    <input type="text" name="video_link_720" id="video_link_720" value="{{ video.links.get('720p', '') }}" required>
 
-        <label for="video_link_480">480p Link:</label>
-        <input type="text" name="video_link_480" id="video_link_480" value="{{ video.links.get('480p', '') }}">
+    <label for="video_link_480">480p Link:</label>
+    <input type="text" name="video_link_480" id="video_link_480" value="{{ video.links.get('480p', '') }}">
 
-        <label for="thumbnail_link">Thumbnail Link:</label>
-        <input type="text" name="thumbnail_link" id="thumbnail_link" value="{{ video.thumbnail }}" required>
+    <label for="thumbnail_link">Thumbnail Link:</label>
+    <input type="text" name="thumbnail_link" id="thumbnail_link" value="{{ video.thumbnail }}" required>
 
-        <label for="video_description">Description:</label>
-        <textarea name="video_description" id="video_description" required>{{ video.description }}</textarea>
+    <label for="video_description">Description:</label>
+    <textarea name="video_description" id="video_description" required>{{ video.description }}</textarea>
 
-        <label for="serial_number">Serial Number:</label>
-        <input type="number" name="serial_number" id="serial_number" value="{{ video.serial }}" required>
+    <label for="serial_number">Serial Number:</label>
+    <input type="number" name="serial_number" id="serial_number" value="{{ video.serial }}" required>
 
-        <button type="submit">Save Changes</button>
-    </form>
-    <a href="{{ url_for('edit_video_list', anime_id=current_anime.id, season_number=current_season) }}">Back to Video List</a>
-</div>
+    <button type="submit">Save Changes</button>
+</form>
+<a href="{{ url_for('edit_video_list', anime_id=current_anime.id, season_number=current_season) }}">Back to Video List</a>
 
 {% endblock %}
