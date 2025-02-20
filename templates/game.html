@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 Critical Server Alert | Premium Admin Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a0f;
+            --neon-yellow: #ffff00;
+            --card-bg: #1a1a2f;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2f 100%);
+            font-family: 'Roboto Mono', monospace;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .glow-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            filter: blur(50px); /* Reduced blur for performance */
+            z-index: -1;
+            opacity: 0.2; /* Slightly reduced opacity for performance */
+        }
+
+        .glow-circle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out; /* Slightly slower animation */
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(75px, 75px); } /* Reduced float distance */
+            50% { transform: translate(-30px, 100px); } /* Reduced float distance */
+            75% { transform: translate(-75px, -30px); } /* Reduced float distance */
+        }
+
+        .main-content {
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.3rem; /* Slightly smaller font size for better mobile fit */
+            text-shadow: 0 0 15px var(--neon-blue); /* Reduced text-shadow blur */
+            animation: glitch 1.5s infinite; /* Slightly slower glitch animation */
+            margin-bottom: 0.8rem; /* Reduced margin */
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 3px 3px var(--neon-pink), -3px -3px var(--neon-blue); } /* Reduced shadow distance */
+            50% { text-shadow: -3px 3px var(--neon-pink), 3px -3px var(--neon-blue); } /* Reduced shadow distance */
+            100% { text-shadow: 3px -3px var(--neon-pink), -3px 3px var(--neon-blue); } /* Reduced shadow distance */
+        }
+
+        .game-container {
+            margin: 1.5rem auto; /* Reduced margin */
+            padding: 0.8rem; /* Reduced padding */
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px; /* Slightly less rounded corners */
+            max-width: 95%;
+            max-width: 400px;
+            backdrop-filter: blur(8px); /* Reduced backdrop blur */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #gameCanvas {
+            margin-top: 0.8rem; /* Reduced margin */
+            width: 100%;
+            max-width: 380px; /* Slightly smaller max width */
+            height: auto;
+            display: none;
+        }
+
+        .hack-button, #playButton {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            border: none;
+            padding: 0.6rem 1.2rem; /* Reduced button padding */
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            border-radius: 6px; /* Slightly less rounded corners */
+            cursor: pointer;
+            transition: transform 0.2s; /* Faster transition */
+            margin: 0.8rem 0; /* Reduced margin */
+            font-size: 0.9rem; /* Slightly smaller font size for buttons */
+        }
+
+        .hack-button:hover, #playButton:hover {
+            transform: scale(1.05); /* Reduced scale on hover */
+            box-shadow: 0 0 20px var(--neon-pink); /* Reduced box-shadow blur */
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem; /* Further reduced margin for smaller screens */
+            }
+            .game-container {
+                padding: 0.4rem; /* Further reduced padding for smaller screens */
+                margin: 1rem auto; /* Further reduced margin for smaller screens */
+            }
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+                gap: 8px; /* Reduced gap for smaller screens */
+                margin-top: 0.5rem; /* Further reduced margin for smaller screens */
+            }
+            .memory-card {
+                width: 70px; /* Even smaller cards for mobile */
+                height: 70px;
+                font-size: 1.3rem; /* Even smaller text for cards */
+                border-radius: 6px; /* Less rounded corners for smaller cards */
+                box-shadow: 0 0 8px rgba(0, 243, 255, 0.5); /* Reduced glow for smaller cards */
+            }
+            .hack-button, #playButton {
+                padding: 0.5rem 1rem; /* Further reduced button padding for smaller screens */
+                font-size: 0.8rem; /* Further reduced button font size for smaller screens */
+                margin: 0.6rem 0; /* Further reduced button margin for smaller screens */
+            }
+        }
+
+        #playButton { /* Style for the Play Game button */
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns for cards */
+            gap: 10px;
+            margin-top: 1rem;
+            width: 95%; /* Make card grid responsive width */
+            max-width: 400px; /* Ensure grid does not exceed container width */
+        }
+
+        .memory-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            width: 100%; /* Cards take full width of their grid cell */
+            height: 90px; /* Slightly reduced card height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem; /* Slightly smaller font size for cards */
+            cursor: pointer;
+            color: var(--neon-blue); /* Default card color */
+            box-shadow: 0 0 8px rgba(0, 243, 255, 0.5); /* Reduced glow for performance */
+            user-select: none; /* Prevent text selection on cards */
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg); /* Flip animation if needed */
+            background-color: var(--neon-yellow); /* Flipped card color */
+            color: var(--dark-bg); /* Symbol color when flipped */
+            box-shadow: 0 0 15px var(--neon-yellow); /* Reduced glow for performance */
+        }
+
+        .memory-card:active {
+            transform: scale(0.98); /* Reduced scale down effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-container">
+        <div class="glow-circle" style="width: 150px; height: 150px; background: var(--neon-blue); top: 20%; left: 15%;"></div>
+        <div class="glow-circle" style="width: 120px; height: 120px; background: var(--neon-pink); top: 60%; right: 15%;"></div>
+    </div>
+
+    <div class="main-content">
+        <h1>SERVER TERMINATED</h1>
+        <p class="subtitle" style="font-size: 1.1rem; color: #aaa;"> Administrative Override Detected - System Failure Imminent
+        </p>
+
+        <div class="game-container">
+            <canvas id="gameCanvas" width="400" height="200"></canvas>
+            <p style="margin-top: 0.8rem; font-size: 0.95rem;">Match the symbols to repair the server!</p> <button id="playButton" onclick="startGame()">Play Game</button>
+            <div class="card-grid" id="cardGrid">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cardGrid = document.getElementById('cardGrid');
+        let gameActive = false;
+        let cards = [];
+        let flippedCards = [];
+        let matches = 0;
+
+        // Expanded set of Font Awesome icons
+        const availableIcons = [
+            '<i class="fas fa-server"></i>', '<i class="fas fa-database"></i>',
+            '<i class="fas fa-network-wired"></i>', '<i class="fas fa-hdd"></i>',
+            '<i class="fas fa-microchip"></i>', '<i class="fas fa-memory"></i>',
+            '<i class="fas fa-ethernet"></i>', '<i class="fas fa-wifi"></i>',
+            '<i class="fas fa-power-off"></i>', '<i class="fas fa-plug"></i>',
+            '<i class="fas fa-fan"></i>', '<i class="fas fa-thermometer-half"></i>',
+            '<i class="fas fa-cpu"></i>', '<i class="fas fa-ram"></i>',
+            '<i class="fas fa-bolt"></i>', '<i class="fas fa-unlock-alt"></i>'
+        ];
+
+        let currentSymbols = []; // To hold the symbols for the current game
+
+        function startGame() {
+            gameActive = true;
+            matches = 0;
+            flippedCards = [];
+            cardGrid.innerHTML = '';
+            document.getElementById('playButton').style.display = 'none';
+
+            // Randomly select 6 icons for the game
+            currentSymbols = selectRandomIcons(availableIcons, 6);
+            const pairedSymbols = [...currentSymbols, ...currentSymbols];
+            cards = shuffleArray(pairedSymbols);
+
+            cards.forEach((symbol, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.classList.add('memory-card');
+                cardElement.dataset.index = index;
+                cardElement.addEventListener('click', flipCard);
+                cardGrid.appendChild(cardElement);
+            });
+        }
+
+        function selectRandomIcons(iconArray, count) {
+            const shuffledIcons = shuffleArray([...iconArray]); // Shuffle a copy
+            return shuffledIcons.slice(0, count); // Take the first 'count' icons
+        }
+
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function flipCard(event) {
+            if (!gameActive) return;
+
+            const card = event.target;
+            const cardIndex = card.dataset.index;
+
+            if (card.classList.contains('flipped') || flippedCards.length >= 2) return;
+
+            card.classList.add('flipped');
+            card.innerHTML = cards[cardIndex];
+            flippedCards.push({ element: card, symbol: cards[cardIndex] });
+
+            if (flippedCards.length === 2) {
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            const card1 = flippedCards[0];
+            const card2 = flippedCards[1];
+
+            if (card1.symbol === card2.symbol) {
+                matches++;
+                flippedCards = [];
+                if (matches === currentSymbols.length) { // Check against the number of pairs
+                    gameActive = false;
+                    setTimeout(() => {
+                        alert('SERVER REPAIRED! - Score: ' + matches);
+                        document.getElementById('playButton').style.display = 'block';
+                    }, 500);
+                }
+            } else {
+                gameActive = false;
+                setTimeout(() => {
+                    card1.element.classList.remove('flipped');
+                    card2.element.classList.remove('flipped');
+                    card1.element.innerHTML = '';
+                    card2.element.innerHTML = '';
+                    flippedCards = [];
+                    gameActive = true;
+                }, 1000);
+            }
+        }
+
+        document.getElementById('playButton').style.display = 'block';
+    </script>
+</body>
+</html>
