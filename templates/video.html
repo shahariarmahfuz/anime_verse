@@ -154,7 +154,7 @@
         .player-wrapper {
             width: 100%;
             max-width: 100%;
-            border-radius: 16px;
+            border-radius: 0; /* Changed from 16px to 0 */
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
             border: 1px solid rgba(124,58,237,0.2);
@@ -164,6 +164,7 @@
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 0; /* Ensure video corners are not curved */
         }
         /* Episode Navigation */
         .episode-navigation {
