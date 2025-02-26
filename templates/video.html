@@ -113,9 +113,19 @@
             width: 100%;
             position: relative;
         }
+        .quality-select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quality-icon {
+            color: #7c3aed;
+            font-size: 1.2rem;
+        }
         .quality-select {
             width: 100%;
-            padding: 12px 45px 12px 20px;
+            padding: 12px 45px 12px 40px;
             border: 2px solid #7c3aed;
             border-radius: 12px;
             background: linear-gradient(145deg, rgba(124,58,237,0.15) 0%, rgba(0,0,0,0.7) 100%);
@@ -154,25 +164,6 @@
             width: 100%;
             height: auto;
             display: block;
-        }
-        /* Video Description */
-        .video-description {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            white-space: pre-line;
-        }
-        .video-description h2 {
-            color: #7c3aed;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        .video-description p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            opacity: 0.9;
         }
         /* Episode Navigation */
         .episode-navigation {
@@ -288,11 +279,14 @@
     <div class="video-container">
         <!-- Quality Selector -->
         <div class="quality-selector">
-            <select class="quality-select" id="quality-selector" onchange="changeVideoQuality(this.value)">
-                {% for quality, link in video.links.items() %}
-                <option value="{{ link }}" {% if quality == default_quality %}selected{% endif %}>{{ quality }}</option>
-                {% endfor %}
-            </select>
+            <div class="quality-select-wrapper">
+                <i class="fas fa-tachometer-alt quality-icon"></i>
+                <select class="quality-select" id="quality-selector" onchange="changeVideoQuality(this.value)">
+                    {% for quality, link in video.links.items() %}
+                    <option value="{{ link }}" {% if quality == default_quality %}selected{% endif %}>{{ quality }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
 
         <!-- Video Player -->
@@ -301,21 +295,15 @@
                 <source src="{{ video.links[default_quality] }}" type="video/mp4">
             </video>
         </div>
-
-        <!-- Video Description -->
-        <div class="video-description">
-            <h2>Episode Description</h2>
-            <p>{{ video.description }}</p>
-        </div>
     </div>
 
     <!-- Episode Navigation -->
     <div class="episode-navigation">
-        {% if prev_episodes %}
+        {% if next_episodes %}
         <div class="episode-section">
-            <h3>Previous Episodes</h3>
+            <h3>Next Episodes</h3>
             <div class="episode-list">
-                {% for ep in prev_episodes %}
+                {% for ep in next_episodes[:2] %}
                 <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
                     <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail">
                     <div class="episode-info">
@@ -328,11 +316,11 @@
         </div>
         {% endif %}
 
-        {% if next_episodes %}
+        {% if prev_episodes %}
         <div class="episode-section">
-            <h3>Next Episodes</h3>
+            <h3>Previous Episodes</h3>
             <div class="episode-list">
-                {% for ep in next_episodes %}
+                {% for ep in prev_episodes[:2] %}
                 <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
                     <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail">
                     <div class="episode-info">
