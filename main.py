@@ -417,6 +417,81 @@ def get_seasons(anime_id):
     if not anime:
         return jsonify({"error": "Anime not found"}), 404
     return jsonify({"seasons": anime['seasons']})
+
+@app.route('/ad', methods=['GET'])
+def add_video_via_get():
+    # Extract parameters from query string
+    anime_id = request.args.get('a', type=int)
+    season_number = request.args.get('s', type=int)
+    title = request.args.get('t')
+    link_720p = request.args.get('720p')
+    link_480p = request.args.get('480p')
+    link_1080p = request.args.get('1080p')
+    thumbnail = request.args.get('th')
+    description = request.args.get('d')
+    serial = request.args.get('eps', type=int)  # Assuming 'eps' is the serial parameter
+
+    # Check for mandatory parameters
+    mandatory_params = [anime_id, season_number, title, link_720p, thumbnail, description, serial]
+    if None in mandatory_params:
+        return jsonify({
+            "status": "error",
+            "message": "Missing mandatory parameters. Required: a, s, t, 720p, th, d, eps"
+        }), 400
+
+    # Load anime data
+    anime_list = load_anime()
+    
+    # Find the target anime
+    anime = next((a for a in anime_list if a['id'] == anime_id), None)
+    if not anime:
+        return jsonify({"status": "error", "message": "Anime not found"}), 404
+
+    # Find or create the season
+    season = next((s for s in anime['seasons'] if s['season_number'] == season_number), None)
+    if not season:
+        season = {'season_number': season_number, 'videos': []}
+        anime['seasons'].append(season)
+
+    # Create links dictionary
+    links = {'720p': link_720p}
+    if link_480p:
+        links['480p'] = link_480p
+    if link_1080p:
+        links['1080p'] = link_1080p
+
+    # Generate video ID
+    video_id = generate_video_id(anime_list)
+
+    # Create new video entry
+    new_video = {
+        'id': video_id,
+        'title': title,
+        'links': links,
+        'thumbnail': thumbnail,
+        'description': description,
+        'serial': serial
+    }
+
+    # Add video to season
+    season['videos'].append(new_video)
+    save_anime(anime_list)
+
+    # Return success response
+    return jsonify({
+        "status": "success",
+        "message": "Video added successfully",
+        "video": {
+            "id": video_id,
+            "title": title,
+            "links": links,
+            "thumbnail": thumbnail,
+            "description": description,
+            "serial": serial
+        },
+        "anime_id": anime_id,
+        "season": season_number
+    }), 200
     
 @app.route('/ping', methods=['GET'])
 def ping():
