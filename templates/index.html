@@ -17,7 +17,7 @@
             background: #0a0a0a;
         }
         body {
-            background: #1a1a1a; /* Simplified background */
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Reintroduce subtle gradient */
             color: #ffffff;
             min-height: 100vh;
         }
@@ -30,52 +30,56 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 0;
-            margin-bottom: 1.5rem;
+            padding: 1rem 0; /* Slightly larger padding */
+            margin-bottom: 2rem; /* Increased margin */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .nav-bar h1 {
-            font-size: 1.4rem; /* Slightly smaller font size */
-            color: #7c3aed; /* Solid color for logo */
+            font-size: 1.6rem; /* Slightly larger logo font */
+            background: linear-gradient(45deg, #7c3aed, #e94584); /* Gradient logo text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         .admin-icon {
-            font-size: 1.1rem; /* Slightly smaller icon */
+            font-size: 1.3rem; /* Slightly larger admin icon */
             color: #7c3aed;
-            transition: color 0.2s ease; /* Simplified transition */
-            padding: 0.4rem; /* Smaller padding */
+            transition: all 0.3s ease;
+            padding: 0.5rem;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.05);
         }
         .admin-icon:hover {
             color: #ffffff;
             background: #7c3aed;
+            transform: rotate(10deg); /* Reduced rotation */
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.4); /* Reduced shadow */
         }
         .header {
             text-align: center;
-            margin-bottom: 2rem; /* Reduced margin */
+            margin-bottom: 3rem; /* Increased margin */
         }
         .search-bar {
-            max-width: 500px; /* Smaller search bar */
-            height: 40px; /* Smaller search bar */
+            max-width: 600px; /* Slightly wider search bar */
+            height: 45px; /* Slightly taller search bar */
             margin: 0 auto;
             position: relative;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 30px; /* Smaller border radius */
+            border-radius: 50px;
             border: 1px solid rgba(124, 58, 237, 0.3);
             overflow: hidden;
         }
         .search-input {
             width: 100%;
-            padding: 0.6rem 2.5rem; /* Smaller padding */
+            padding: 0.7rem 3rem; /* Adjusted padding */
             border: none;
             background: transparent;
             color: white;
-            font-size: 1rem; /* Smaller font size */
-            border-radius: 30px; /* Smaller border radius */
+            font-size: 1.05rem; /* Slightly larger font */
+            border-radius: 50px;
         }
         .search-input:focus {
             outline: none;
@@ -84,23 +88,23 @@
         }
         .search-icon {
             position: absolute;
-            left: 0.8rem; /* Adjusted icon position */
+            left: 1rem;
             top: 50%;
             transform: translateY(-50%);
             color: #7c3aed;
         }
         .search-button {
             position: absolute;
-            right: 0.3rem; /* Adjusted button position */
+            right: 0.4rem; /* Adjusted button position */
             top: 50%;
             transform: translateY(-50%);
             background: rgba(124, 58, 237, 0.2);
             border: none;
             color: #7c3aed;
             cursor: pointer;
-            padding: 0.4rem; /* Smaller padding */
+            padding: 0.4rem 0.4rem; /* Adjusted padding */
             border-radius: 50%;
-            transition: background-color 0.2s ease, color 0.2s ease; /* Simplified transition */
+            transition: all 0.3s ease;
             outline: none;
         }
         .search-button:focus {
@@ -111,29 +115,29 @@
             color: #ffffff;
         }
         .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5); /* Slightly darker placeholder */
-            letter-spacing: 0.3px; /* Reduced letter spacing */
-            font-size: 0.9rem; /* Smaller font size */
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.4px; /* Slightly increased letter spacing */
+            font-size: 1rem;
         }
         .anime-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Even smaller cards */
-            gap: 1rem; /* Reduced gap */
-            margin-bottom: 3rem; /* Reduced margin */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly larger cards */
+            gap: 1.8rem; /* Adjusted gap */
+            margin-bottom: 4rem;
         }
         .anime-card {
-            background: #1a1a1a; /* Solid background color */
-            border-radius: 10px; /* Smaller border radius */
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a); /* Reintroduce subtle gradient */
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Simplified transition */
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(124, 58, 237, 0.2); /* Thinner border */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Reduced box shadow */
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1); /* Slightly increased shadow */
         }
         .anime-card:hover {
-            transform: translateY(-4px); /* Reduced translateY */
-            box-shadow: 0 6px 15px rgba(124, 58, 237, 0.2); /* Reduced box shadow */
+            transform: translateY(-6px); /* Slightly increased translateY */
+            box-shadow: 0 10px 35px rgba(124, 58, 237, 0.25); /* Adjusted shadow */
         }
         .image-container {
             position: relative;
@@ -148,28 +152,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 70%, rgba(0,0,0,0.7) 100%); /* Simplified gradient */
+            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.75) 100%); /* Adjusted gradient */
             z-index: 1;
         }
         .anime-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.2s ease; /* Simplified transition */
+            transition: transform 0.3s ease;
         }
         .anime-card:hover img {
-            transform: scale(1.03); /* Reduced scale */
+            transform: scale(1.04); /* Slightly reduced scale */
         }
         .anime-card h3 {
-            padding: 0.6rem; /* Smaller padding */
-            font-size: 0.9rem; /* Smaller font size */
-            font-weight: 400; /* Lighter font weight */
-            color: #7c3aed; /* Solid color for title */
+            padding: 1rem; /* Adjusted padding */
+            font-size: 1.1rem; /* Slightly larger font */
+            font-weight: 500;
+            background: linear-gradient(45deg, #7c3aed, #e94584); /* Gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-align: center;
             position: relative;
             margin: 0;
-            line-height: 1.2; /* Reduced line height */
-            min-height: 40px; /* Reduced min height */
+            line-height: 1.3;
+            min-height: 55px; /* Adjusted min height */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,142 +183,141 @@
         .anime-card h3::after {
             content: '';
             position: absolute;
-            bottom: 0.5rem; /* Adjusted bottom position */
+            bottom: 0.7rem; /* Adjusted bottom */
             left: 50%;
             transform: translateX(-50%);
-            width: 40%; /* Reduced width */
-            height: 1px; /* Thinner line */
-            background: #7c3aed; /* Solid color for line */
-            transition: width 0.2s ease; /* Simplified transition */
-            opacity: 0.7; /* Slightly transparent line */
+            width: 55%; /* Adjusted width */
+            height: 2px;
+            background: linear-gradient(45deg, #7c3aed, #e94584); /* Gradient underline */
+            transition: width 0.3s ease;
         }
         .anime-card:hover h3::after {
-            width: 60%; /* Reduced width on hover */
+            width: 75%; /* Adjusted width on hover */
         }
         .no-results {
             text-align: center;
-            padding: 6rem 0 2rem; /* Reduced padding */
-            opacity: 0.6; /* More transparent no-results text */
+            padding: 7rem 0 3rem; /* Adjusted padding */
+            opacity: 0.7;
             position: relative;
-            min-height: 50vh; /* Reduced min height */
+            min-height: 60vh; /* Adjusted min height */
         }
         .no-results i {
-            font-size: 3rem; /* Smaller icon */
-            margin-bottom: 1.5rem; /* Reduced margin */
+            font-size: 3.5rem; /* Slightly larger icon */
+            margin-bottom: 1.8rem; /* Adjusted margin */
             color: #7c3aed;
         }
         .no-results p {
-            font-size: 1rem; /* Smaller font size */
-            line-height: 1.5; /* Reduced line height */
-            max-width: 500px; /* Smaller max width */
+            font-size: 1.1rem; /* Slightly larger font */
+            line-height: 1.6;
+            max-width: 550px; /* Slightly wider text area */
             margin: 0 auto;
         }
         .home-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 35px; /* Smaller button */
-            height: 35px; /* Smaller button */
-            margin-top: 1.5rem; /* Reduced margin */
-            background: rgba(255, 255, 255, 0.08); /* More transparent button */
+            width: 40px;
+            height: 40px;
+            margin-top: 2.5rem; /* Adjusted margin */
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Simplified transition */
-            border: 1px solid rgba(124, 58, 237, 0.2); /* Thinner border */
-            backdrop-filter: blur(3px); /* Reduced blur */
+            transition: all 0.3s ease;
+            border: 1px solid rgba(124, 58, 237, 0.25); /* Adjusted border */
+            backdrop-filter: blur(4px); /* Slightly increased blur */
             position: absolute;
-            bottom: 1.5rem; /* Adjusted bottom position */
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
         }
         .home-button:hover {
-            background: #7c3aed;
-            transform: translateY(-1px) scale(1.02); /* Reduced transform */
-            box-shadow: 0 3px 10px rgba(124, 58, 237, 0.3); /* Reduced box shadow */
+            background: linear-gradient(45deg, #7c3aed, #e94584);
+            transform: translateY(-1px) scale(1.01); /* Reduced scale */
+            box-shadow: 0 3px 15px rgba(124, 58, 237, 0.35); /* Adjusted shadow */
         }
         .pagination-container {
             position: relative;
-            margin-top: 2rem; /* Reduced margin */
+            margin-top: 3rem;
             background: transparent;
-            padding: 0.8rem 0; /* Reduced padding */
+            padding: 1rem 0;
         }
         .pagination {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.8rem; /* Reduced gap */
+            gap: 1.2rem; /* Adjusted gap */
             max-width: 1400px;
             margin: 0 auto;
         }
         .pagination a {
-            padding: 0.6rem 1rem; /* Smaller padding */
-            background: rgba(124, 58, 237, 0.2); /* More transparent pagination buttons */
-            border-radius: 8px; /* Smaller border radius */
+            padding: 0.7rem 1.4rem; /* Adjusted padding */
+            background: rgba(124, 58, 237, 0.2);
+            border-radius: 10px;
             color: white;
             text-decoration: none;
-            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Simplified transition */
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem; /* Reduced gap */
+            gap: 0.6rem;
             font-weight: 400;
-            font-size: 0.8rem; /* Smaller font size */
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Thinner border */
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .pagination a:hover {
             background: #7c3aed;
-            box-shadow: 0 0 15px rgba(124, 58, 237, 0.3); /* Reduced box shadow */
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); /* Adjusted shadow */
             transform: scale(1.02); /* Reduced scale */
         }
         .page-info {
-            font-weight: 400;
+            font-weight: 500;
             color: #7c3aed;
-            min-width: 60px; /* Reduced min width */
+            min-width: 70px;
             text-align: center;
-            padding: 0 0.8rem; /* Reduced padding */
-            font-size: 0.8rem; /* Smaller font size */
+            padding: 0 1rem;
+            font-size: 0.9rem;
         }
         @media (max-width: 768px) {
             .container {
-                padding: 0.8rem; /* Reduced padding */
+                padding: 1rem;
             }
             .nav-bar h1 {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
             }
             .anime-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Even smaller cards on mobile */
-                gap: 0.8rem; /* Reduced gap */
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Adjusted card size for mobile */
+                gap: 1.2rem; /* Adjusted gap */
             }
             .search-input {
-                padding: 0.5rem 1.8rem; /* Smaller padding */
-                font-size: 0.9rem; /* Smaller font size */
+                padding: 0.6rem 2rem;
+                font-size: 1rem;
             }
             .no-results {
-                padding: 3rem 0 1rem; /* Reduced padding */
-                min-height: 40vh; /* Reduced min height */
+                padding: 4rem 0 2rem;
+                min-height: 50vh;
             }
             .no-results i {
-                font-size: 2.5rem; /* Smaller icon */
-                margin-bottom: 1rem; /* Reduced margin */
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
             }
             .no-results p {
-                font-size: 0.9rem; /* Smaller font size */
+                font-size: 1rem;
             }
             .home-button {
-                bottom: 1rem;
-                width: 35px;
-                height: 35px;
+                bottom: 1.5rem;
+                width: 38px;
+                height: 38px;
             }
             .pagination {
-                gap: 0.6rem; /* Reduced gap */
+                gap: 0.8rem;
             }
             .pagination a {
-                padding: 0.5rem 1rem; /* Smaller padding */
-                font-size: 0.7rem; /* Smaller font size */
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
             }
             .page-info {
-                min-width: 50px; /* Reduced min width */
-                font-size: 0.7rem; /* Smaller font size */
+                min-width: 60px;
+                font-size: 0.8rem;
             }
         }
     </style>
