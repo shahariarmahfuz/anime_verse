@@ -18,7 +18,7 @@
             background: #0a0a0a;
         }
         body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); /* Reintroduce subtle gradient */
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             color: #ffffff;
             min-height: 100vh;
         }
@@ -31,13 +31,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0; /* Slightly larger padding */
-            margin-bottom: 2rem; /* Increased margin */
+            padding: 1rem 0;
+            margin-bottom: 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .nav-bar h1 {
-            font-size: 1.6rem; /* Slightly larger logo font */
-            background: linear-gradient(45deg, #7c3aed, #e94584); /* Gradient logo text */
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, #7c3aed, #e94584);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
@@ -46,7 +46,7 @@
             gap: 0.5rem;
         }
         .admin-icon {
-            font-size: 1.3rem; /* Slightly larger admin icon */
+            font-size: 1.3rem;
             color: #7c3aed;
             transition: all 0.3s ease;
             padding: 0.5rem;
@@ -56,16 +56,16 @@
         .admin-icon:hover {
             color: #ffffff;
             background: #7c3aed;
-            transform: rotate(10deg); /* Reduced rotation */
-            box-shadow: 0 0 10px rgba(124, 58, 237, 0.4); /* Reduced shadow */
+            transform: rotate(10deg);
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
         }
         .header {
             text-align: center;
-            margin-bottom: 3rem; /* Increased margin */
+            margin-bottom: 3rem;
         }
         .search-bar {
-            max-width: 600px; /* Slightly wider search bar */
-            height: 45px; /* Slightly taller search bar */
+            max-width: 600px;
+            height: 45px;
             margin: 0 auto;
             position: relative;
             background: rgba(255, 255, 255, 0.05);
@@ -75,11 +75,11 @@
         }
         .search-input {
             width: 100%;
-            padding: 0.7rem 3rem; /* Adjusted padding */
+            padding: 0.7rem 3rem;
             border: none;
             background: transparent;
             color: white;
-            font-size: 1.05rem; /* Slightly larger font */
+            font-size: 1.05rem;
             border-radius: 50px;
         }
         .search-input:focus {
@@ -96,14 +96,14 @@
         }
         .search-button {
             position: absolute;
-            right: 0.4rem; /* Adjusted button position */
+            right: 0.4rem;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(124, 58, 237, 0.2);
             border: none;
             color: #7c3aed;
             cursor: pointer;
-            padding: 0.4rem 0.4rem; /* Adjusted padding */
+            padding: 0.4rem 0.4rem;
             border-radius: 50%;
             transition: all 0.3s ease;
             outline: none;
@@ -117,28 +117,28 @@
         }
         .search-input::placeholder {
             color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 0.4px; /* Slightly increased letter spacing */
+            letter-spacing: 0.4px;
             font-size: 1rem;
         }
         .anime-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly larger cards */
-            gap: 1.8rem; /* Adjusted gap */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.8rem;
             margin-bottom: 4rem;
         }
         .anime-card {
-            background: linear-gradient(45deg, #0a0a0a, #1a1a1a); /* Reintroduce subtle gradient */
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
             border: 1px solid rgba(124, 58, 237, 0.3);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1); /* Slightly increased shadow */
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
         }
         .anime-card:hover {
-            transform: translateY(-6px); /* Slightly increased translateY */
-            box-shadow: 0 10px 35px rgba(124, 58, 237, 0.25); /* Adjusted shadow */
+            transform: translateY(-6px);
+            box-shadow: 0 10px 35px rgba(124, 58, 237, 0.25);
         }
         .image-container {
             position: relative;
@@ -153,7 +153,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.75) 100%); /* Adjusted gradient */
+            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.75) 100%);
             z-index: 1;
         }
         .anime-card img {
@@ -163,54 +163,55 @@
             transition: transform 0.3s ease;
         }
         .anime-card:hover img {
-            transform: scale(1.04); /* Slightly reduced scale */
+            transform: scale(1.04);
         }
         .anime-card h3 {
-            padding: 1rem; /* Adjusted padding */
-            font-size: 1.1rem; /* Slightly larger font */
+            padding: 0.8rem 0.5rem; /* Adjusted padding */
+            font-size: 0.95rem; /* Smaller font size */
             font-weight: 500;
-            background: linear-gradient(45deg, #7c3aed, #e94584); /* Gradient text */
+            background: linear-gradient(45deg, #7c3aed, #e94584);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
             position: relative;
             margin: 0;
-            line-height: 1.3;
-            min-height: 55px; /* Adjusted min height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            line-height: 1.2;
+            white-space: nowrap; /* Prevent wrapping */
+            overflow: hidden; /* Hide overflow */
+            text-overflow: ellipsis; /* Add ellipsis */
+            width: 100%;
+            max-width: 100%;
         }
         .anime-card h3::after {
             content: '';
             position: absolute;
-            bottom: 0.7rem; /* Adjusted bottom */
+            bottom: 0.4rem; /* Adjusted bottom */
             left: 50%;
             transform: translateX(-50%);
-            width: 55%; /* Adjusted width */
+            width: 40%; /* Adjusted width */
             height: 2px;
-            background: linear-gradient(45deg, #7c3aed, #e94584); /* Gradient underline */
+            background: linear-gradient(45deg, #7c3aed, #e94584);
             transition: width 0.3s ease;
         }
         .anime-card:hover h3::after {
-            width: 75%; /* Adjusted width on hover */
+            width: 60%; /* Adjusted width on hover */
         }
         .no-results {
             text-align: center;
-            padding: 7rem 0 3rem; /* Adjusted padding */
+            padding: 7rem 0 3rem;
             opacity: 0.7;
             position: relative;
-            min-height: 60vh; /* Adjusted min height */
+            min-height: 60vh;
         }
         .no-results i {
-            font-size: 3.5rem; /* Slightly larger icon */
-            margin-bottom: 1.8rem; /* Adjusted margin */
+            font-size: 3.5rem;
+            margin-bottom: 1.8rem;
             color: #7c3aed;
         }
         .no-results p {
-            font-size: 1.1rem; /* Slightly larger font */
+            font-size: 1.1rem;
             line-height: 1.6;
-            max-width: 550px; /* Slightly wider text area */
+            max-width: 550px;
             margin: 0 auto;
         }
         .home-button {
@@ -219,14 +220,14 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            margin-top: 2.5rem; /* Adjusted margin */
+            margin-top: 2.5rem;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
-            border: 1px solid rgba(124, 58, 237, 0.25); /* Adjusted border */
-            backdrop-filter: blur(4px); /* Slightly increased blur */
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            backdrop-filter: blur(4px);
             position: absolute;
             bottom: 2rem;
             left: 50%;
@@ -234,8 +235,8 @@
         }
         .home-button:hover {
             background: linear-gradient(45deg, #7c3aed, #e94584);
-            transform: translateY(-1px) scale(1.01); /* Reduced scale */
-            box-shadow: 0 3px 15px rgba(124, 58, 237, 0.35); /* Adjusted shadow */
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 0 3px 15px rgba(124, 58, 237, 0.35);
         }
         .pagination-container {
             position: relative;
@@ -247,12 +248,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1.2rem; /* Adjusted gap */
+            gap: 1.2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
         .pagination a {
-            padding: 0.7rem 1.4rem; /* Adjusted padding */
+            padding: 0.7rem 1.4rem;
             background: rgba(124, 58, 237, 0.2);
             border-radius: 10px;
             color: white;
@@ -267,8 +268,8 @@
         }
         .pagination a:hover {
             background: #7c3aed;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); /* Adjusted shadow */
-            transform: scale(1.02); /* Reduced scale */
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.35);
+            transform: scale(1.02);
         }
         .page-info {
             font-weight: 500;
@@ -286,8 +287,8 @@
                 font-size: 1.7rem;
             }
             .anime-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Adjusted card size for mobile */
-                gap: 1.2rem; /* Adjusted gap */
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1.2rem;
             }
             .search-input {
                 padding: 0.6rem 2rem;
