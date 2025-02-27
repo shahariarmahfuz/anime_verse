@@ -158,13 +158,16 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
             border: 1px solid rgba(124,58,237,0.2);
             background: #000;
+            aspect-ratio: 16 / 9; /* ভিডিওর অনুপাত ঠিক করা */
+            position: relative;
         }
         video {
             width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 0;
-            preload: none; /* ভিডিও অটো লোড বন্ধ */
+            height: 100%;
+            object-fit: cover; /* ভিডিও সম্পূর্ণ কন্টেইনারে ফিট */
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         /* Episode Navigation */
         .episode-navigation {
