@@ -96,14 +96,16 @@
             border: 1px solid rgba(124, 58, 237, 0.3);
             cursor: pointer;
             transition: 0.3s;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .video-card:hover {
             background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px); /* হালকা উপরে উঠবে */
         }
         .video-card img {
             width: 120px;
             height: 70px;
-            object-fit: cover;
+            object-fit: cover; /* ছবি ফিট হবে */
             border-radius: 5px;
         }
         .video-details {
@@ -142,6 +144,14 @@
             }
             .video-details p {
                 font-size: 0.75rem;
+            }
+        }
+        @media (prefers-reduced-motion) {
+            .video-card {
+                transition: none !important; /* অ্যানিমেশন বন্ধ */
+            }
+            .video-card:hover {
+                transform: none !important;
             }
         }
     </style>
