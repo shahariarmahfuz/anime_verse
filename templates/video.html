@@ -158,16 +158,16 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
             border: 1px solid rgba(124,58,237,0.2);
             background: #000;
-            aspect-ratio: 16 / 9; /* ভিডিওর অনুপাত ঠিক করা */
             position: relative;
+            padding-top: 56.25%; /* Default aspect ratio (16:9) */
         }
         video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* ভিডিও সম্পূর্ণ কন্টেইনারে ফিট */
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* ভিডিও সম্পূর্ণ কন্টেইনারে ফিট */
         }
         /* Episode Navigation */
         .episode-navigation {
@@ -374,6 +374,14 @@
             videoPlayer.currentTime = currentTime;
             videoPlayer.play();
         }
+
+        // ভিডিওর অনুপাত স্বয়ংক্রিয়ভাবে নির্ধারণ
+        const video = document.getElementById('my-video');
+        video.addEventListener('loadedmetadata', () => {
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            const playerWrapper = document.querySelector('.player-wrapper');
+            playerWrapper.style.paddingTop = `${100 / aspectRatio}%`;
+        });
     </script>
 </body>
 </html>
