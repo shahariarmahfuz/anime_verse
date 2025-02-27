@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ video.title }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" media="print" onload="this.media='all'">
     <style>
         * {
             margin: 0;
@@ -25,7 +25,6 @@
             align-items: center;
             padding: 1.2rem 2rem;
             background: linear-gradient(145deg, rgba(25,25,25,0.95) 0%, rgba(15,15,15,0.95) 100%);
-            backdrop-filter: blur(8px);
             position: relative;
             top: 0;
             z-index: 1000;
@@ -154,7 +153,7 @@
         .player-wrapper {
             width: 100%;
             max-width: 100%;
-            border-radius: 0; /* Changed from 16px to 0 */
+            border-radius: 0;
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
             border: 1px solid rgba(124,58,237,0.2);
@@ -164,7 +163,8 @@
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 0; /* Ensure video corners are not curved */
+            border-radius: 0;
+            preload: none; /* ভিডিও অটো লোড বন্ধ */
         }
         /* Episode Navigation */
         .episode-navigation {
@@ -199,6 +199,7 @@
             transition: 0.3s;
             text-decoration: none;
             color: white;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .episode-card:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -210,6 +211,7 @@
             object-fit: cover;
             border-radius: 5px;
             flex-shrink: 0;
+            loading="lazy"; /* ইমেজ লোডিং অপ্টিমাইজ */
         }
         .episode-info {
             flex-grow: 1;
@@ -256,6 +258,14 @@
                 -webkit-line-clamp: 2;
             }
         }
+        @media (prefers-reduced-motion) {
+            .episode-card, .home-icon {
+                transition: none !important; /* অ্যানিমেশন বন্ধ */
+            }
+            .episode-card:hover {
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -292,7 +302,7 @@
 
         <!-- Video Player -->
         <div class="player-wrapper">
-            <video id="my-video" controls playsinline>
+            <video id="my-video" controls playsinline preload="none">
                 <source src="{{ video.links[default_quality] }}" type="video/mp4">
             </video>
         </div>
@@ -306,7 +316,7 @@
             <div class="episode-list">
                 {% for ep in next_episodes[:2] %}
                 <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
-                    <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail">
+                    <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail" loading="lazy">
                     <div class="episode-info">
                         <h4>Episode {{ ep.serial }}: {{ ep.title }}</h4>
                         <p>{{ ep.short_description }}</p>
@@ -323,7 +333,7 @@
             <div class="episode-list">
                 {% for ep in prev_episodes[:2] %}
                 <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
-                    <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail">
+                    <img src="{{ ep.thumbnail }}" class="episode-thumbnail" alt="Thumbnail" loading="lazy">
                     <div class="episode-info">
                         <h4>Episode {{ ep.serial }}: {{ ep.title }}</h4>
                         <p>{{ ep.short_description }}</p>
