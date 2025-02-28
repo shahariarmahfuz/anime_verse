@@ -43,23 +43,36 @@
             z-index: 2;
         }
         .anime-info h1 {
-            /* ডাইনামিক ফন্ট সাইজ যুক্ত করা হয়েছে */
-            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-            line-height: 1.4;
+            font-size: 1.8rem; /* Default size for short titles */
+            line-height: 1.3;
             margin-bottom: 0.5rem;
             color: #7c3aed;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            /* সর্বোচ্চ ৩ লাইন পর্যন্ত দেখাবে */
-            -webkit-line-clamp: 3;
+            max-height: 3.6em; /* Allows 2 lines max (1.8rem * 2) */
         }
         .anime-info p {
             font-size: 0.9rem;
             opacity: 0.9;
             color: #d1d5db;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        /* Long title adjustment */
+        @media screen and (min-width: 769px) {
+            .anime-info h1[style*="--long-title"] {
+                font-size: clamp(1.4rem, 2.5vw, 1.7rem); /* Only applies to long titles */
+            }
+        }
+        @media (max-width: 768px) {
+            .anime-info h1 {
+                font-size: 1.4rem; /* Base mobile size */
+                max-height: 6.2em; /* Allows 3 lines */
+            }
+            .anime-info h1[style*="--long-title"] {
+                font-size: clamp(1.1rem, 4vw, 1.4rem); /* Adjustment for long titles */
+            }
         }
         .season-selector {
             position: relative;
@@ -152,11 +165,6 @@
             .video-details p {
                 font-size: 0.75rem;
             }
-            /* মোবাইলে টাইটেল ফন্ট সামঞ্জস্য */
-            .anime-info h1 {
-                -webkit-line-clamp: 2;
-                font-size: clamp(1rem, 4vw, 1.4rem);
-            }
         }
         @media (prefers-reduced-motion) {
             .video-card {
@@ -171,7 +179,8 @@
 <body>
     <div class="anime-header">
         <div class="anime-info">
-            <h1>{{ anime.name }}</h1>
+            <!-- Add inline CSS marker for long titles -->
+            <h1 {% if anime.name|length > 25 %}style="--long-title: true"{% endif %}>{{ anime.name }}</h1>
             <p>{{ anime.description }}</p>
         </div>
     </div>
