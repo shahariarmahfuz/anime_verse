@@ -48,7 +48,7 @@ def generate_video_id(anime_list):
 @app.route('/')
 def home():
     page = request.args.get('page', 1, type=int)
-    per_page = 8
+    per_page = 12
     search_query = request.args.get('search', '')
     
     anime_list = load_anime()
