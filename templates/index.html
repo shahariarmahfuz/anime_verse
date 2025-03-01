@@ -49,7 +49,7 @@
             font-size: 2rem;
             color: #7c3aed;
             transition: transform 0.3s ease;
-            will-change: transform;
+            will-change: transform; /* পারফরম্যান্স উন্নত */
         }
         .nav-bar h1 .cat-icon:hover {
             transform: rotate(15deg);
@@ -61,7 +61,7 @@
             padding: 0.5rem;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.05);
-            will-change: transform, background;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .admin-icon:hover {
             color: #ffffff;
@@ -117,7 +117,7 @@
             border-radius: 50%;
             transition: all 0.3s ease;
             outline: none;
-            will-change: transform, background;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .search-button:focus {
             outline: none;
@@ -133,24 +133,24 @@
         }
         .anime-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1.2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* changed to 120px */
+            gap: 1rem; /* reduced gap to 1rem */
+            margin-bottom: 4rem;
         }
         .anime-card {
             background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
-            border-radius: 6px;
+            border-radius: 4px; /* হালকা কার্ভ */
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
             border: 1px solid rgba(124, 58, 237, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            will-change: transform, box-shadow;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* শ্যাডো কমিয়ে দেওয়া */
+            will-change: transform, box-shadow; /* পারফরম্যান্স উন্নত */
         }
         .anime-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.2);
+            transform: translateY(-4px); /* ট্রান্সফর্ম কমিয়ে দেওয়া */
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.2); /* শ্যাডো কমিয়ে দেওয়া */
         }
         .image-container {
             position: relative;
@@ -165,7 +165,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.75) 100%);
             z-index: 1;
         }
         .anime-card img {
@@ -173,14 +173,14 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
-            will-change: transform;
+            will-change: transform; /* পারফরম্যান্স উন্নত */
         }
         .anime-card:hover img {
             transform: scale(1.04);
         }
         .anime-card h3 {
-            padding: 0.6rem 0.4rem;
-            font-size: 0.9rem;
+            padding: 0.8rem 0.5rem;
+            font-size: 0.95rem;
             font-weight: 500;
             background: linear-gradient(45deg, #7c3aed, #e94584);
             -webkit-background-clip: text;
@@ -192,11 +192,13 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
+            max-width: 100%;
         }
         .anime-card h3::after {
             content: '';
             position: absolute;
-            bottom: 0.3rem;
+            bottom: 0.4rem;
             left: 50%;
             transform: translateX(-50%);
             width: 40%;
@@ -238,17 +240,17 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border: 1px solid rgba(124, 58, 237, 0.25);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px); /* ব্লার কমিয়ে দেওয়া */
             position: absolute;
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            will-change: transform, background;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .home-button:hover {
             background: linear-gradient(45deg, #7c3aed, #e94584);
             transform: translateY(-1px) scale(1.01);
-            box-shadow: 0 3px 10px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 3px 10px rgba(124, 58, 237, 0.2); /* শ্যাডো কমিয়ে দেওয়া */
         }
         .pagination-container {
             position: relative;
@@ -277,11 +279,11 @@
             font-weight: 400;
             font-size: 0.9rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            will-change: transform, background;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .pagination a:hover {
             background: #7c3aed;
-            box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.2); /* শ্যাডো কমিয়ে দেওয়া */
             transform: scale(1.02);
         }
         .page-info {
@@ -300,12 +302,15 @@
                 font-size: 1.7rem;
             }
             .anime-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 1rem;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjusted for mobile to 100px */
+                gap: 0.7rem; /* একটু কম gap মোবাইলে */
             }
-            .anime-card h3 {
-                font-size: 0.85rem;
-                padding: 0.5rem 0.3rem;
+            .anime-card {
+                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Mobile shadow reduced */
+            }
+            .anime-card:hover {
+                transform: translateY(-3px); /* Reduced hover transform for mobile */
+                box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2); /* Mobile hover shadow reduced */
             }
             .search-input {
                 padding: 0.6rem 2rem;
@@ -339,17 +344,9 @@
                 font-size: 0.8rem;
             }
         }
-        @media (max-width: 480px) {
-            .anime-grid {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            }
-            .anime-card h3 {
-                font-size: 0.8rem;
-            }
-        }
         @media (prefers-reduced-motion) {
             .anime-card, .admin-icon, .search-button, .home-button, .pagination a {
-                transition: none !important;
+                transition: none !important; /* অ্যানিমেশন বন্ধ */
             }
             .anime-card:hover {
                 transform: none !important;
