@@ -174,25 +174,148 @@
                 transform: none !important;
             }
         }
+
+/* কাстом সিলেক্টর CSS */
+.custom-selector {
+  position: relative;
+  display: inline-block;
+  font-family: 'Arial', sans-serif;
+  width: 100%; /* সিজন সিলেক্টর এর উইডথ ফুল করার জন্য */
+}
+
+.custom-selector select {
+  display: none;
+}
+
+.selector-button {
+  border: 2px solid #8a2be2;
+  background-color: #000;
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 1rem; /* সিজন সিলেক্টর এর ফন্ট সাইজ এর জন্য */
+  cursor: pointer;
+  width: 100%; /* বাটন উইডথ ফুল করার জন্য */
+  text-align: center; /* বাটন টেক্সট মাঝে সারিবদ্ধ */
+  border-radius: 30px; /* সিজন সিলেক্টর এর বর্ডার রেডিয়াস এর জন্য */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* সামান্য গাঢ় শ্যাডো */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden; /* বাটন কনটেন্ট ক্লিপ করার জন্য */
+}
+
+.selector-button:hover, .selector-button:focus {
+  border-color: #a64dff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* হোভারে আরও গাঢ় শ্যাডো */
+}
+
+.selector-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #fff;
+  opacity: 0.9;
+  transition: transform 0.3s ease; /* অ্যারো রোটেশন ট্রানজিশন */
+}
+
+.selector-button.active::after {
+  transform: translateY(-50%) rotate(180deg); /* অপশন দেখা গেলে অ্যারো ঘোরানো */
+}
+
+.selector-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  border: 2px solid #8a2be2;
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+  z-index: 1;
+  display: none;
+  border-radius: 7px;
+  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.5); /* আরও গাঢ় শ্যাডো */
+  overflow: hidden;
+  opacity: 0.98;
+  transform-origin: top center; /* অ্যানিমেশন সেন্টার সেট */
+  animation: slideDown 0.3s ease-out forwards; /* স্লাইড ডাউন অ্যানিমেশন */
+}
+
+.selector-options.show {
+  display: block;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9);
+  }
+  to {
+    opacity: 0.98;
+    transform: scaleY(1);
+  }
+}
+
+.option {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem; /* অপশন ফন্ট সাইজ সিজন সিলেক্টর এর জন্য */
+  color: #fff;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #444;
+  text-align: center; /* অপশন টেক্সট মাঝে সারিবদ্ধ */
+  border-radius: 7px; /* Option border-radius */
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover {
+  background-color: #2a2a2a; /* হোভারে আরও হালকা কালো ব্যাকগ্রাউন্ড */
+  opacity: 1;
+}
+
+.option.selected {
+  background-color: #3a3a3a; /* নির্বাচিত অপশন আরও হালকা কালো */
+  font-weight: 500;
+}
+
+
     </style>
 </head>
 <body>
     <div class="anime-header">
         <div class="anime-info">
-            <!-- Add inline CSS marker for long titles -->
             <h1 {% if anime.name|length > 25 %}style="--long-title: true"{% endif %}>{{ anime.name }}</h1>
             <p>{{ anime.description }}</p>
         </div>
     </div>
     <div class="season-selector">
-        <select class="season-select" onchange="window.location.href=this.value">
+        <div class="custom-selector">
+          <select id="customSelector" class="season-select" onchange="window.location.href=this.value">
             {% for s in seasons %}
-            <option value="{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}" 
+            <option value="{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}"
                 {% if s.season_number == season.season_number %}selected{% endif %}>
                 Season {{ s.season_number }}
             </option>
             {% endfor %}
-        </select>
+          </select>
+          <div class="selector-button" id="selectorButton" onclick="toggleOptions()">
+            {% for s in seasons %}
+                {% if s.season_number == season.season_number %}
+                    Season {{ s.season_number }}
+                {% endif %}
+            {% endfor %}
+          </div>
+          <div class="selector-options" id="options">
+            {% for s in seasons %}
+                <div class="option" onclick="selectOption('Season {{ s.season_number }}', '{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}')">Season {{ s.season_number }}</div>
+            {% endfor %}
+          </div>
+        </div>
     </div>
     <div class="video-list">
         {% for video in season.videos %}
@@ -206,11 +329,37 @@
         {% endfor %}
     </div>
     <script>
-        document.querySelector('.season-select').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                window.location.href = e.target.value;
-            }
-        });
+function toggleOptions() {
+  const optionsElement = document.getElementById("options");
+  const selectorButton = document.getElementById("selectorButton");
+  optionsElement.classList.toggle("show");
+  selectorButton.classList.toggle("active"); /* বাটন একটিভ ক্লাস টগল */
+}
+
+function selectOption(optionValue, url) {
+  document.getElementById("selectorButton").innerText = optionValue;
+  document.getElementById("customSelector").value = optionValue;
+  document.getElementById("options").classList.remove("show");
+  document.getElementById("selectorButton").classList.remove("active"); /* একটিভ ক্লাস সরান */
+
+  window.location.href = url;
+
+
+  let options = document.querySelectorAll('.option');
+  options.forEach(option => option.classList.remove('selected'));
+  let selectedOptionElement = document.querySelector(`.option[onclick="selectOption('${optionValue}')"]`);
+  if (selectedOptionElement) {
+    selectedOptionElement.classList.add('selected');
+  }
+}
+
+document.addEventListener('click', function(event) {
+  var selector = document.querySelector('.custom-selector');
+  if (!selector.contains(event.target)) {
+    document.getElementById("options").classList.remove("show");
+    document.getElementById("selectorButton").classList.remove("active"); /* অপশন লিস্ট বাইরে ক্লিক করলে একটিভ ক্লাস সরান */
+  }
+});
     </script>
 </body>
 </html>
