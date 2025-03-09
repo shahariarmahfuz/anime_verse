@@ -7,8 +7,11 @@
     <label for="name">Anime Name:</label>
     <input type="text" name="name" id="name" value="{{ anime.name }}" required>
     <br>
-    <label for="image">Anime Image URL:</label>
+    <label for="image">Anime Image URL (2:3):</label>
     <input type="text" name="image" id="image" value="{{ anime.image }}" required>
+    <br>
+    <label for="anime_page_photo">Anime Page Photo URL (16:9):</label>
+    <input type="text" name="anime_page_photo" id="anime_page_photo" value="{{ anime.anime_page_photo }}" required>
     <br>
     <label for="description">Description:</label>
     <textarea name="description" id="description" required>{{ anime.description }}</textarea>
