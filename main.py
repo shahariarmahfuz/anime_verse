@@ -141,6 +141,7 @@ def add_anime():
     if request.method == 'POST':
         anime_name = request.form['anime_name']
         anime_image = request.form['anime_image']
+        anime_page_photo = request.form['anime_page_photo']
         anime_description = request.form['anime_description']
         season_number = request.form['season_number']
 
@@ -152,6 +153,7 @@ def add_anime():
             'id': generate_anime_id(anime_list),
             'name': anime_name,
             'image': anime_image,
+            'anime_page_photo': anime_page_photo,
             'description': anime_description,
             'seasons': [{
                 'season_number': int(season_number),
@@ -240,6 +242,7 @@ def edit_anime(anime_id):
     if request.method == 'POST':
         anime['name'] = request.form['name']
         anime['image'] = request.form['image']
+        anime['anime_page_photo'] = request.form['anime_page_photo']
         anime['description'] = request.form['description']
         save_anime(anime_list)
         return redirect(url_for('edit_anime_select'))
