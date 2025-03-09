@@ -45,6 +45,70 @@ def generate_video_id(anime_list):
                     max_id = video['id']
     return max_id + 1
 
+@app.route('/get')
+def get_videos():
+    anime_id = request.args.get('anime', type=int)
+    season_number = request.args.get('s', type=int)
+
+    anime_list = load_anime()
+    anime = next((a for a in anime_list if a['id'] == anime_id), None)
+    if not anime:
+        return jsonify({"error": "Anime not found"}), 404
+
+    season = next((s for s in anime['seasons'] if s['season_number'] == season_number), None)
+    if not season:
+        return jsonify({"error": "Season not found"}), 404
+
+    videos = []
+    for video in season['videos']:
+        videos.append({
+            "episode": video['serial'],
+            "title": video['title'],
+            "links": video['links']
+        })
+
+    return jsonify({"anime": anime['name'], "season": season_number, "videos": videos})
+
+@app.route('/re')
+def replace_links():
+    anime_id = request.args.get('a', type=int)
+    season_number = request.args.get('s', type=int)
+    episode_number = request.args.get('e', type=int)
+    link_720p = request.args.get('720p')
+    link_480p = request.args.get('480p')
+    link_1080p = request.args.get('1080p')
+
+    anime_list = load_anime()
+    anime = next((a for a in anime_list if a['id'] == anime_id), None)
+    if not anime:
+        return jsonify({"error": "Anime not found"}), 404
+
+    season = next((s for s in anime['seasons'] if s['season_number'] == season_number), None)
+    if not season:
+        return jsonify({"error": "Season not found"}), 404
+
+    video = next((v for v in season['videos'] if v['serial'] == episode_number), None)
+    if not video:
+        return jsonify({"error": "Episode not found"}), 404
+
+    # Update links
+    if link_720p:
+        video['links']['720p'] = link_720p
+    if link_480p:
+        video['links']['480p'] = link_480p
+    if link_1080p:
+        video['links']['1080p'] = link_1080p
+
+    save_anime(anime_list)
+    return jsonify({
+        "status": "success",
+        "message": "Links updated successfully",
+        "anime": anime['name'],
+        "season": season_number,
+        "episode": episode_number,
+        "links": video['links']
+    })
+
 @app.route('/')
 def home():
     page = request.args.get('page', 1, type=int)
