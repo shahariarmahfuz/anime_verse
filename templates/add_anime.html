@@ -61,7 +61,8 @@
     <h1>Add New Anime</h1>
     <form method="POST">
         <input type="text" name="anime_name" placeholder="Anime Name" required>
-        <input type="text" name="anime_image" placeholder="Anime Image URL">
+        <input type="text" name="anime_image" placeholder="Anime Image URL (2:3)" required>
+        <input type="text" name="anime_page_photo" placeholder="Anime Page Photo URL (16:9)" required>
         <textarea name="anime_description" placeholder="Anime Description" required></textarea>
         <input type="number" name="season_number" placeholder="Season Number" required>
         <button type="submit">Create Anime</button>
