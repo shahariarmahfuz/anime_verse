@@ -78,6 +78,14 @@ def replace_links():
     link_480p = request.args.get('480p')
     link_1080p = request.args.get('1080p')
 
+    # Replace '@' with '&' in links
+    if link_720p:
+        link_720p = link_720p.replace('@', '&')
+    if link_480p:
+        link_480p = link_480p.replace('@', '&')
+    if link_1080p:
+        link_1080p = link_1080p.replace('@', '&')
+
     anime_list = load_anime()
     anime = next((a for a in anime_list if a['id'] == anime_id), None)
     if not anime:
