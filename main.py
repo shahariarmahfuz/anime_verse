@@ -567,6 +567,43 @@ def add_video_via_get():
         "anime_id": anime_id,
         "season": season_number
     }), 200
+
+@app.route('/photo', methods=['GET'])
+def update_anime_photos():
+    anime_id = request.args.get('anime', type=int)
+    image_link = request.args.get('img')
+    anime_page_photo_link = request.args.get('anime_img')
+
+    if not anime_id:
+        return jsonify({"status": "error", "message": "Anime ID is required"}), 400
+
+    if not image_link and not anime_page_photo_link:
+        return jsonify({"status": "error", "message": "At least one image link (img or anime_img) is required"}), 400
+
+    anime_list = load_anime()
+    anime = next((a for a in anime_list if a['id'] == anime_id), None)
+
+    if not anime:
+        return jsonify({"status": "error", "message": "Anime not found"}), 404
+
+    if image_link:
+        anime['image'] = image_link
+    if anime_page_photo_link:
+        anime['anime_page_photo'] = anime_page_photo_link
+
+    save_anime(anime_list)
+
+    response = {
+        "status": "success",
+        "message": "Photos updated successfully",
+    }
+
+    if image_link:
+        response["image"] = image_link
+    if anime_page_photo_link:
+        response["anime_page_photo"] = anime_page_photo_link
+
+    return jsonify(response), 200
     
 @app.route('/ping', methods=['GET'])
 def ping():
