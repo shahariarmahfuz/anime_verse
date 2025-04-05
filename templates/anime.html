@@ -6,6 +6,8 @@
     <title>{{ anime.name }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Adsterra Script -->
+    <script type='text/javascript' src='//pl26297863.effectiveratecpm.com/66/e4/04/66e404fd70c7d2a8369e3546c13b3a07.js'></script>
     <style>
         * {
             margin: 0;
@@ -16,7 +18,6 @@
         body {
             background: #0a0a0a;
             color: #ffffff;
-            padding-bottom: 80px; /* Social Bar এর জন্য স্পেস */
         }
         .anime-header {
             position: relative;
@@ -73,6 +74,13 @@
             .anime-info h1[style*="--long-title"] {
                 font-size: clamp(1.1rem, 4vw, 1.4rem);
             }
+        }
+        .ad-container {
+            margin: 20px auto;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
         }
         .season-selector {
             position: relative;
@@ -278,6 +286,11 @@
         </div>
     </div>
 
+    <!-- Adsterra Ad Container -->
+    <div class="ad-container">
+        <!-- Ad will be automatically injected here -->
+    </div>
+
     <div class="season-selector">
         <div class="custom-selector">
             <select id="customSelector" class="season-select" onchange="window.location.href=this.value">
@@ -313,10 +326,6 @@
         </div>
         {% endfor %}
     </div>
-
-    <!-- Social Bar Ad Container -->
-    <div id="adsterra-socialbar" style="position:fixed; bottom:0; left:0; right:0; height:80px; z-index:9999; background:transparent;"></div>
-
     <script>
         function toggleOptions() {
             const optionsElement = document.getElementById("options");
@@ -348,8 +357,5 @@
             }
         });
     </script>
-
-    <!-- Adsterra Social Bar Script -->
-    <script type='text/javascript' src='//pl26297863.effectiveratecpm.com/66/e4/04/66e404fd70c7d2a8369e3546c13b3a07.js'></script>
 </body>
 </html>
