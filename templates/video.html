@@ -17,7 +17,6 @@
         body {
             background: #0a0a0a;
             color: #ffffff;
-            padding-bottom: 80px; /* Social Bar space */
         }
         /* Header Styles */
         .page-header {
@@ -106,6 +105,7 @@
             max-width: 1200px;
             margin: 1.5rem auto;
             padding: 0 1.5rem;
+            position: relative; /* Added for positioning banner ad */
         }
         /* Quality Selector */
         .quality-selector {
@@ -165,44 +165,7 @@
             height: auto;
             display: block;
             border-radius: 0;
-            preload: none;
-        }
-        /* Ad Styles */
-        .direct-ad {
-            margin: 30px auto;
-            text-align: center;
-            padding: 15px;
-            background: rgba(124,58,237,0.1);
-            border-radius: 12px;
-            max-width: 728px;
-        }
-        .direct-ad a {
-            text-decoration: none;
-            color: #7c3aed;
-            display: block;
-        }
-        .direct-ad img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .direct-ad p {
-            color: #7c3aed !important;
-            font-size: 0.8rem;
-            margin-top: 8px;
-            opacity: 0.9;
-            letter-spacing: 0.5px;
-        }
-        /* Social Bar */
-        #adsterra-socialbar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            z-index: 9999;
-            background: transparent;
+            preload: none; /* ভিডিও অটো লোড বন্ধ */
         }
         /* Episode Navigation */
         .episode-navigation {
@@ -237,7 +200,7 @@
             transition: 0.3s;
             text-decoration: none;
             color: white;
-            will-change: transform, background;
+            will-change: transform, background; /* পারফরম্যান্স উন্নত */
         }
         .episode-card:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -249,7 +212,7 @@
             object-fit: cover;
             border-radius: 5px;
             flex-shrink: 0;
-            loading="lazy";
+            loading="lazy"; /* ইমেজ লোডিং অপ্টিমাইজ */
         }
         .episode-info {
             flex-grow: 1;
@@ -295,23 +258,19 @@
                 font-size: 1rem;
                 -webkit-line-clamp: 2;
             }
-            .direct-ad {
-                margin: 20px auto;
-                padding: 10px;
-            }
         }
         @media (prefers-reduced-motion) {
             .episode-card, .home-icon {
-                transition: none !important;
+                transition: none !important; /* অ্যানিমেশন বন্ধ */
             }
             .episode-card:hover {
                 transform: none !important;
             }
         }
     </style>
+    <script type='text/javascript' src='//controlaffliction.com/c0/89/5e/c0895e6dcd07e31b41be2cb1b6b17586.js'></script>
 </head>
 <body>
-    <!-- Page Header -->
     <div class="page-header">
         <div class="episode-title">
             <i class="fas fa-play-circle episode-icon"></i>
@@ -323,14 +282,24 @@
         </a>
     </div>
 
-    <!-- Video Header -->
     <div class="video-header">
         <h1>{{ anime_name }}</h1>
     </div>
 
-    <!-- Video Container -->
     <div class="video-container">
-        <!-- Quality Selector -->
+        <div style="text-align: center; margin-bottom: 10px;">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '23e42f2f1b09a3a1d13602ad2651eca7',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//controlaffliction.com/23e42f2f1b09a3a1d13602ad2651eca7/invoke.js"></script>
+        </div>
+
         <div class="quality-selector">
             <div class="quality-select-wrapper">
                 <i class="fas fa-tachometer-alt quality-icon"></i>
@@ -342,28 +311,17 @@
             </div>
         </div>
 
-        <!-- Video Player -->
         <div class="player-wrapper">
             <video id="my-video" controls playsinline preload="none">
                 <source src="{{ video.links[default_quality] }}" type="video/mp4">
             </video>
         </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="https://controlaffliction.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" style="background-color: #7c3aed; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">আমাদের ডোনেট করতে এখানে ক্লিক করুন</a>
+        </div>
     </div>
 
-    <!-- Direct Ad Link -->
-    <div class="direct-ad">
-        <a href="https://www.effectiveratecpm.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           onclick="trackAdClick('Direct Ad')">
-            <img src="https://i.ibb.co/0jQ37JC/ad-banner.png" 
-                 alt="Sponsored Ad" 
-                 style="max-width:100%;height:auto;border-radius:8px;">
-            <p>Sponsored Content</p>
-        </a>
-    </div>
-
-    <!-- Episode Navigation -->
     <div class="episode-navigation">
         {% if next_episodes %}
         <div class="episode-section">
@@ -400,17 +358,8 @@
         {% endif %}
     </div>
 
-    <!-- Social Bar Ad Container -->
-    <div id="adsterra-socialbar"></div>
-
-    <!-- Fluid Player and Custom Scripts -->
     <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-    
-    <!-- Adsterra Social Bar Script -->
-    <script type='text/javascript' src='//pl26297863.effectiveratecpm.com/66/e4/04/66e404fd70c7d2a8369e3546c13b3a07.js'></script>
-
     <script>
-        // Video Player Initialization
         var myFP = fluidPlayer('my-video', {
             layoutControls: {
                 primaryColor: "#7c3aed",
@@ -426,7 +375,6 @@
             }
         });
 
-        // Quality Change Function
         function changeVideoQuality(link) {
             const videoPlayer = document.getElementById('my-video');
             const currentTime = videoPlayer.currentTime;
@@ -435,23 +383,8 @@
             videoPlayer.currentTime = currentTime;
             videoPlayer.play();
         }
-
-        // Ad Tracking Function
-        function trackAdClick(adType) {
-            if(typeof gtag !== 'undefined') {
-                gtag('event', 'click', {
-                    'event_category': 'Ad Interaction',
-                    'event_label': adType
-                });
-            }
-        }
-
-        // Check if Social Bar Loaded
-        setTimeout(function() {
-            if(document.getElementById('adsterra-socialbar').innerHTML.trim() === '') {
-                console.warn('Adsterra Social Bar not loaded - check ad blocker');
-            }
-        }, 2000);
     </script>
+
+    <script type='text/javascript' src='//controlaffliction.com/66/e4/04/66e404fd70c7d2a8369e3546c13b3a07.js'></script>
 </body>
 </html>
