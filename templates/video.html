@@ -164,7 +164,26 @@
             height: auto;
             display: block;
             border-radius: 0;
-            preload: none; /* ভিডিও অটো লোড বন্ধ */
+            preload: none;
+        }
+        /* Ad Section */
+        .ad-container {
+            margin: 30px auto;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            max-width: 1200px;
+        }
+        .ad-container a {
+            text-decoration: none;
+            color: #7c3aed;
+            display: block;
+        }
+        .ad-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
         /* Episode Navigation */
         .episode-navigation {
@@ -199,7 +218,7 @@
             transition: 0.3s;
             text-decoration: none;
             color: white;
-            will-change: transform, background; /* পারফরম্যান্স উন্নত */
+            will-change: transform, background;
         }
         .episode-card:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -211,7 +230,7 @@
             object-fit: cover;
             border-radius: 5px;
             flex-shrink: 0;
-            loading="lazy"; /* ইমেজ লোডিং অপ্টিমাইজ */
+            loading="lazy";
         }
         .episode-info {
             flex-grow: 1;
@@ -260,7 +279,7 @@
         }
         @media (prefers-reduced-motion) {
             .episode-card, .home-icon {
-                transition: none !important; /* অ্যানিমেশন বন্ধ */
+                transition: none !important;
             }
             .episode-card:hover {
                 transform: none !important;
@@ -306,6 +325,14 @@
                 <source src="{{ video.links[default_quality] }}" type="video/mp4">
             </video>
         </div>
+    </div>
+
+    <!-- Ad Section -->
+    <div class="ad-container">
+        <a href="https://www.effectiveratecpm.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" rel="noopener noreferrer">
+            <img src="https://via.placeholder.com/728x90" alt="Advertisement">
+            <p style="margin-top: 8px; font-size: 0.9rem; color: #7c3aed;">Sponsored Content</p>
+        </a>
     </div>
 
     <!-- Episode Navigation -->
