@@ -261,6 +261,13 @@
             text-align: center;
             margin-bottom: 10px;
             margin-top: 10px;
+            overflow: hidden; /* Prevent iframe overflow */
+            max-width: 100%; /* Ensure banner doesn't exceed container width */
+        }
+        .ad-banner iframe {
+            max-width: 100%; /* Make iframe responsive */
+            width: 100% !important; /* Override inline width if necessary */
+            height: auto !important; /* Maintain aspect ratio */
         }
         .direct-link-ad {
             text-align: center;
@@ -351,19 +358,6 @@
             </video>
         </div>
 
-        <div class="ad-banner">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '23e42f2f1b09a3a1d13602ad2651eca7',
-                    'format' : 'iframe',
-                    'height' : 60,
-                    'width' : 468,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//controlaffliction.com/23e42f2f1b09a3a1d13602ad2651eca7/invoke.js"></script>
-        </div>
-
         <div class="direct-link-ad">
             <a href="https://controlaffliction.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" class="direct-link-button">
                 <i class="fas fa-bell update-icon"></i> Get Latest Updates
@@ -386,19 +380,7 @@
                 </a>
                 {% endfor %}
             </div>
-            <div class="ad-banner">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '23e42f2f1b09a3a1d13602ad2651eca7',
-                        'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//controlaffliction.com/23e42f2f1b09a3a1d13602ad2651eca7/invoke.js"></script>
             </div>
-        </div>
         {% endif %}
 
         {% if prev_episodes %}
