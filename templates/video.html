@@ -267,6 +267,37 @@
                 transform: none !important;
             }
         }
+        /* Ad Styles */
+        .ad-banner {
+            text-align: center;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+        .ad-native {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            text-align: center;
+        }
+        .direct-link-ad {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .direct-link-button {
+            background-color: #7c3aed;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .direct-link-button:hover {
+            background-color: #9b6bf0;
+        }
     </style>
     <script type='text/javascript' src='//controlaffliction.com/c0/89/5e/c0895e6dcd07e31b41be2cb1b6b17586.js'></script>
 </head>
@@ -287,7 +318,7 @@
     </div>
 
     <div class="video-container">
-        <div style="text-align: center; margin-bottom: 10px;">
+        <div class="ad-banner">
             <script type="text/javascript">
                 atOptions = {
                     'key' : '23e42f2f1b09a3a1d13602ad2651eca7',
@@ -317,13 +348,21 @@
             </video>
         </div>
 
-        <div style="text-align: center; margin-top: 15px;">
-            <script async="async" data-cfasync="false" src="//controlaffliction.com/e08d4dae19d653868673bbb71ff5aeb5/invoke.js"></script>
-            <div id="container-e08d4dae19d653868673bbb71ff5aeb5"></div>
+        <div class="ad-banner">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '23e42f2f1b09a3a1d13602ad2651eca7',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//controlaffliction.com/23e42f2f1b09a3a1d13602ad2651eca7/invoke.js"></script>
         </div>
 
-        <div style="text-align: center; margin-top: 15px;">
-            <a href="https://controlaffliction.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" style="background-color: #7c3aed; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">আমাদের ডোনেট করতে এখানে ক্লিক করুন</a>
+        <div class="direct-link-ad">
+            <a href="https://controlaffliction.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" class="direct-link-button">আমাদের ডোনেট করতে এখানে ক্লিক করুন</a>
         </div>
     </div>
 
@@ -331,6 +370,10 @@
         {% if next_episodes %}
         <div class="episode-section">
             <h3>Next Episodes</h3>
+            <div class="ad-native">
+                <script async="async" data-cfasync="false" src="//controlaffliction.com/e08d4dae19d653868673bbb71ff5aeb5/invoke.js"></script>
+                <div id="container-e08d4dae19d653868673bbb71ff5aeb5"></div>
+            </div>
             <div class="episode-list">
                 {% for ep in next_episodes[:2] %}
                 <a href="{{ url_for('video_player', video_id=ep.id) }}" class="episode-card">
