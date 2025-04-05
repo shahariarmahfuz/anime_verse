@@ -265,21 +265,41 @@
         .direct-link-ad {
             text-align: center;
             margin-top: 15px;
-            margin-bottom: 15px; /* Added margin below direct link */
+            margin-bottom: 15px;
         }
         .direct-link-button {
             background-color: #7c3aed;
             color: white;
-            padding: 10px 20px; /* Adjusted padding for mobile */
+            padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 0.9rem; /* Adjusted font size for mobile */
+            font-size: 0.9rem;
             font-weight: bold;
             transition: background-color 0.3s ease;
-            display: inline-block; /* Ensure it behaves like a button */
+            display: inline-flex; /* Use flex to align icon and text */
+            align-items: center;
+            gap: 5px; /* Space between icon and text */
         }
         .direct-link-button:hover {
             background-color: #9b6bf0;
+        }
+        .update-icon { /* Example icon style */
+            font-size: 1rem;
+        }
+        /* Mobile Specific Styles */
+        @media (max-width: 600px) {
+            .ad-banner {
+                margin-left: -1rem; /* Adjust for full width on mobile */
+                margin-right: -1rem;
+            }
+            /* Consider making the top banner sticky on mobile (optional) */
+            /*.page-header + .video-header + .video-container > .ad-banner:first-child {
+                position: sticky;
+                top: 50px; !* Adjust top value based on header height *!
+                z-index: 999;
+                background-color: #0a0a0a;
+                padding: 10px 0;
+            }*/
         }
     </style>
     <script type='text/javascript' src='//controlaffliction.com/c0/89/5e/c0895e6dcd07e31b41be2cb1b6b17586.js'></script>
@@ -345,7 +365,9 @@
         </div>
 
         <div class="direct-link-ad">
-            <a href="https://controlaffliction.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" class="direct-link-button">Click here for latest updates</a>
+            <a href="https://controlaffliction.com/dxwpjiazm3?key=c282c8138e9771a7dfff86581290c23c" target="_blank" class="direct-link-button">
+                <i class="fas fa-bell update-icon"></i> Get Latest Updates
+            </a>
         </div>
     </div>
 
@@ -363,6 +385,18 @@
                     </div>
                 </a>
                 {% endfor %}
+            </div>
+            <div class="ad-banner">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '23e42f2f1b09a3a1d13602ad2651eca7',
+                        'format' : 'iframe',
+                        'height' : 60,
+                        'width' : 468,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//controlaffliction.com/23e42f2f1b09a3a1d13602ad2651eca7/invoke.js"></script>
             </div>
         </div>
         {% endif %}
