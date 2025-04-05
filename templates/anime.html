@@ -6,6 +6,8 @@
     <title>{{ anime.name }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Adsterra Script -->
+    <script type='text/javascript' src='//pl26297863.effectiveratecpm.com/66/e4/04/66e404fd70c7d2a8369e3546c13b3a07.js'></script>
     <style>
         * {
             margin: 0;
@@ -43,7 +45,7 @@
             z-index: 2;
         }
         .anime-info h1 {
-            font-size: 1.8rem; /* Default size for short titles */
+            font-size: 1.8rem;
             line-height: 1.3;
             margin-bottom: 0.5rem;
             color: #7c3aed;
@@ -51,7 +53,7 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            max-height: 3.6em; /* Allows 2 lines max (1.8rem * 2) */
+            max-height: 3.6em;
         }
         .anime-info p {
             font-size: 0.9rem;
@@ -59,20 +61,26 @@
             color: #d1d5db;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
         }
-        /* Long title adjustment */
         @media screen and (min-width: 769px) {
             .anime-info h1[style*="--long-title"] {
-                font-size: clamp(1.4rem, 2.5vw, 1.7rem); /* Only applies to long titles */
+                font-size: clamp(1.4rem, 2.5vw, 1.7rem);
             }
         }
         @media (max-width: 768px) {
             .anime-info h1 {
-                font-size: 1.4rem; /* Base mobile size */
-                max-height: 6.2em; /* Allows 3 lines */
+                font-size: 1.4rem;
+                max-height: 6.2em;
             }
             .anime-info h1[style*="--long-title"] {
-                font-size: clamp(1.1rem, 4vw, 1.4rem); /* Adjustment for long titles */
+                font-size: clamp(1.1rem, 4vw, 1.4rem);
             }
+        }
+        .ad-container {
+            margin: 20px auto;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
         }
         .season-selector {
             position: relative;
@@ -174,116 +182,100 @@
                 transform: none !important;
             }
         }
-
-/* কাстом সিলেক্টর CSS */
-.custom-selector {
-  position: relative;
-  display: inline-block;
-  font-family: 'Arial', sans-serif;
-  width: 100%; /* সিজন সিলেক্টর এর উইডথ ফুল করার জন্য */
-}
-
-.custom-selector select {
-  display: none;
-}
-
-.selector-button {
-  border: 2px solid #8a2be2;
-  background-color: #000;
-  color: #fff;
-  padding: 12px 16px;
-  font-size: 1rem; /* সিজন সিলেক্টর এর ফন্ট সাইজ এর জন্য */
-  cursor: pointer;
-  width: 100%; /* বাটন উইডথ ফুল করার জন্য */
-  text-align: center; /* বাটন টেক্সট মাঝে সারিবদ্ধ */
-  border-radius: 30px; /* সিজন সিলেক্টর এর বর্ডার রেডিয়াস এর জন্য */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* সামান্য গাঢ় শ্যাডো */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden; /* বাটন কনটেন্ট ক্লিপ করার জন্য */
-}
-
-.selector-button:hover, .selector-button:focus {
-  border-color: #a64dff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* হোভারে আরও গাঢ় শ্যাডো */
-}
-
-.selector-button::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 18px;
-  transform: translateY(-50%);
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #fff;
-  opacity: 0.9;
-  transition: transform 0.3s ease; /* অ্যারো রোটেশন ট্রানজিশন */
-}
-
-.selector-button.active::after {
-  transform: translateY(-50%) rotate(180deg); /* অপশন দেখা গেলে অ্যারো ঘোরানো */
-}
-
-.selector-options {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  border: 2px solid #8a2be2;
-  background-color: #000;
-  color: #fff;
-  width: 100%;
-  z-index: 1;
-  display: none;
-  border-radius: 7px;
-  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.5); /* আরও গাঢ় শ্যাডো */
-  overflow: hidden;
-  opacity: 0.98;
-  transform-origin: top center; /* অ্যানিমেশন সেন্টার সেট */
-  animation: slideDown 0.3s ease-out forwards; /* স্লাইড ডাউন অ্যানিমেশন */
-}
-
-.selector-options.show {
-  display: block;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: scaleY(0.9);
-  }
-  to {
-    opacity: 0.98;
-    transform: scaleY(1);
-  }
-}
-
-.option {
-  padding: 10px 16px;
-  cursor: pointer;
-  font-size: 1rem; /* অপশন ফন্ট সাইজ সিজন সিলেক্টর এর জন্য */
-  color: #fff;
-  transition: background-color 0.2s ease;
-  border-bottom: 1px solid #444;
-  text-align: center; /* অপশন টেক্সট মাঝে সারিবদ্ধ */
-  border-radius: 7px; /* Option border-radius */
-}
-
-.option:last-child {
-  border-bottom: none;
-}
-
-.option:hover {
-  background-color: #2a2a2a; /* হোভারে আরও হালকা কালো ব্যাকগ্রাউন্ড */
-  opacity: 1;
-}
-
-.option.selected {
-  background-color: #3a3a3a; /* নির্বাচিত অপশন আরও হালকা কালো */
-  font-weight: 500;
-}
-
-
+        .custom-selector {
+            position: relative;
+            display: inline-block;
+            font-family: 'Arial', sans-serif;
+            width: 100%;
+        }
+        .custom-selector select {
+            display: none;
+        }
+        .selector-button {
+            border: 2px solid #8a2be2;
+            background-color: #000;
+            color: #fff;
+            padding: 12px 16px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            border-radius: 30px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .selector-button:hover, .selector-button:focus {
+            border-color: #a64dff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        }
+        .selector-button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 18px;
+            transform: translateY(-50%);
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #fff;
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+        .selector-button.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        .selector-options {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            border: 2px solid #8a2be2;
+            background-color: #000;
+            color: #fff;
+            width: 100%;
+            z-index: 1;
+            display: none;
+            border-radius: 7px;
+            box-shadow: 0 4px 9px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            opacity: 0.98;
+            transform-origin: top center;
+            animation: slideDown 0.3s ease-out forwards;
+        }
+        .selector-options.show {
+            display: block;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: scaleY(0.9);
+            }
+            to {
+                opacity: 0.98;
+                transform: scaleY(1);
+            }
+        }
+        .option {
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #fff;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #444;
+            text-align: center;
+            border-radius: 7px;
+        }
+        .option:last-child {
+            border-bottom: none;
+        }
+        .option:hover {
+            background-color: #2a2a2a;
+            opacity: 1;
+        }
+        .option.selected {
+            background-color: #3a3a3a;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -293,28 +285,34 @@
             <p>{{ anime.description }}</p>
         </div>
     </div>
+
+    <!-- Adsterra Ad Container -->
+    <div class="ad-container">
+        <!-- Ad will be automatically injected here -->
+    </div>
+
     <div class="season-selector">
         <div class="custom-selector">
-          <select id="customSelector" class="season-select" onchange="window.location.href=this.value">
-            {% for s in seasons %}
-            <option value="{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}"
-                {% if s.season_number == season.season_number %}selected{% endif %}>
-                Season {{ s.season_number }}
-            </option>
-            {% endfor %}
-          </select>
-          <div class="selector-button" id="selectorButton" onclick="toggleOptions()">
-            {% for s in seasons %}
-                {% if s.season_number == season.season_number %}
+            <select id="customSelector" class="season-select" onchange="window.location.href=this.value">
+                {% for s in seasons %}
+                <option value="{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}"
+                    {% if s.season_number == season.season_number %}selected{% endif %}>
                     Season {{ s.season_number }}
-                {% endif %}
-            {% endfor %}
-          </div>
-          <div class="selector-options" id="options">
-            {% for s in seasons %}
-                <div class="option" onclick="selectOption('Season {{ s.season_number }}', '{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}')">Season {{ s.season_number }}</div>
-            {% endfor %}
-          </div>
+                </option>
+                {% endfor %}
+            </select>
+            <div class="selector-button" id="selectorButton" onclick="toggleOptions()">
+                {% for s in seasons %}
+                    {% if s.season_number == season.season_number %}
+                        Season {{ s.season_number }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="selector-options" id="options">
+                {% for s in seasons %}
+                    <div class="option" onclick="selectOption('Season {{ s.season_number }}', '{{ url_for('anime_details', anime_id=anime.id, season=s.season_number) }}')">Season {{ s.season_number }}</div>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="video-list">
@@ -329,37 +327,35 @@
         {% endfor %}
     </div>
     <script>
-function toggleOptions() {
-  const optionsElement = document.getElementById("options");
-  const selectorButton = document.getElementById("selectorButton");
-  optionsElement.classList.toggle("show");
-  selectorButton.classList.toggle("active"); /* বাটন একটিভ ক্লাস টগল */
-}
+        function toggleOptions() {
+            const optionsElement = document.getElementById("options");
+            const selectorButton = document.getElementById("selectorButton");
+            optionsElement.classList.toggle("show");
+            selectorButton.classList.toggle("active");
+        }
 
-function selectOption(optionValue, url) {
-  document.getElementById("selectorButton").innerText = optionValue;
-  document.getElementById("customSelector").value = optionValue;
-  document.getElementById("options").classList.remove("show");
-  document.getElementById("selectorButton").classList.remove("active"); /* একটিভ ক্লাস সরান */
+        function selectOption(optionValue, url) {
+            document.getElementById("selectorButton").innerText = optionValue;
+            document.getElementById("customSelector").value = optionValue;
+            document.getElementById("options").classList.remove("show");
+            document.getElementById("selectorButton").classList.remove("active");
+            window.location.href = url;
 
-  window.location.href = url;
+            let options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            let selectedOptionElement = document.querySelector(`.option[onclick="selectOption('${optionValue}')"]`);
+            if (selectedOptionElement) {
+                selectedOptionElement.classList.add('selected');
+            }
+        }
 
-
-  let options = document.querySelectorAll('.option');
-  options.forEach(option => option.classList.remove('selected'));
-  let selectedOptionElement = document.querySelector(`.option[onclick="selectOption('${optionValue}')"]`);
-  if (selectedOptionElement) {
-    selectedOptionElement.classList.add('selected');
-  }
-}
-
-document.addEventListener('click', function(event) {
-  var selector = document.querySelector('.custom-selector');
-  if (!selector.contains(event.target)) {
-    document.getElementById("options").classList.remove("show");
-    document.getElementById("selectorButton").classList.remove("active"); /* অপশন লিস্ট বাইরে ক্লিক করলে একটিভ ক্লাস সরান */
-  }
-});
+        document.addEventListener('click', function(event) {
+            var selector = document.querySelector('.custom-selector');
+            if (!selector.contains(event.target)) {
+                document.getElementById("options").classList.remove("show");
+                document.getElementById("selectorButton").classList.remove("active");
+            }
+        });
     </script>
 </body>
 </html>
